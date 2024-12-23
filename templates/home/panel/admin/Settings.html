@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L&H Distribuciones - Configuraciones</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home/panel/admin/Settings.css') }}">
+</head>
+<body>
+<!-- Contenedor Principal -->
+<div class="main-container">
+    <!-- Botón para Volver al Menú -->
+    <a class="btn-back" id="btn-back" href="{{ url_for('admin.adminDashboard') }}">Volver al Menú</a>
+
+    <!-- Encabezado -->
+    <div class="header">
+        <h1 class="title">Configuraciones</h1>
+        <p class="subtitle">Ajusta las configuraciones del sistema según las necesidades de la empresa</p>
+    </div>
+
+    <!-- Opciones de Configuración -->
+    <div class="settings-section">
+        <h3>Opciones Generales</h3>
+        <form id="settings-form">
+            <div class="form-group">
+                <label for="theme">Tema del Sistema</label>
+                <select id="theme" name="theme">
+                    <option value="light">Claro</option>
+                    <option value="dark">Oscuro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="work-hours">Horas de Trabajo Estándar</label>
+                <input type="number" id="work-hours" name="work-hours" value="8" min="1" max="12">
+            </div>
+            <div class="form-group">
+                <label for="notifications">Notificaciones por Correo</label>
+                <select id="notifications" name="notifications">
+                    <option value="enabled">Habilitadas</option>
+                    <option value="disabled">Deshabilitadas</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-save">Guardar Cambios</button>
+        </form>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/home/panel/admin/Settings.js') }}"></script>
+</body>
+</html>

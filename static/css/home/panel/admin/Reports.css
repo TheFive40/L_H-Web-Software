@@ -1,0 +1,224 @@
+
+/* Contenedor Principal */
+.main-container {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 1200px;
+    padding: 40px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Encabezado */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.title {
+    font-size: 36px;
+    color: #003f8a;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.subtitle {
+    font-size: 18px;
+    color: #666;
+    margin-top: 10px;
+}
+
+/* Filtros */
+.filters {
+    background: #f4f4f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+}
+
+.filters h3 {
+    font-size: 20px;
+    color: #005bb5;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.filter-group label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.filter-group input, .filter-group select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.filter-group input:focus, .filter-group select:focus {
+    border-color: #005bb5;
+    box-shadow: 0 0 5px rgba(0, 91, 181, 0.5);
+    outline: none;
+}
+
+.btn-filter {
+    background: linear-gradient(90deg, #005bb5, #003f8a);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+}
+
+.btn-filter:hover {
+    background: linear-gradient(90deg, #ffcc00, #f59e00);
+    color: #003f8a;
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 204, 0, 0.6);
+}
+
+/* Tabla de Reportes */
+.reports-section h3 {
+    font-size: 24px;
+    color: #005bb5;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+
+table th, table td {
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+    background: #ffffff;
+}
+
+table th {
+    background: linear-gradient(90deg, #005bb5, #003f8a);
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+table tr:nth-child(even) {
+    background: #f4f4f9;
+}
+
+table tr:hover {
+    background: #e3f2fd;
+    transition: background 0.3s ease;
+}
+/* Estilos Generales */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #005bb5, #6faefb);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Cambiado de center a flex-start */
+    min-height: 100vh;
+    overflow-y: auto; /* Permitir desplazamiento vertical */
+    padding: 20px; /* Espacio alrededor para evitar recortes */
+}
+
+/* Contenedor Principal */
+.main-container {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 1200px;
+    padding: 40px;
+    animation: fadeIn 1s ease-in-out;
+    overflow-y: auto; /* Permitir desplazamiento interno si es necesario */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-height: 768px) {
+    body {
+        align-items: flex-start;
+        padding: 10px;
+    }
+    .main-container {
+        padding: 20px;
+    }
+    table th, table td {
+        padding: 10px 12px;
+    }
+}
+/* Botón de Volver */
+.btn-back {
+    position: absolute;
+    top: 20px;
+    left: 20px; /* Cambiado a la izquierda */
+    background: linear-gradient(90deg, #ffcc00, #f59e00);
+    color: #003f8a;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10; /* Asegurar que esté por encima del contenido */
+}
+
+.btn-back:hover {
+    background: linear-gradient(90deg, #f59e00, #ff9800);
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Contenedor Principal Ajuste */
+.main-container {
+    position: relative; /* Asegurar que el botón se posicione dentro */
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 1200px;
+    padding: 40px;
+    animation: fadeIn 1s ease-in-out;
+    overflow: hidden; /* Evitar que elementos salgan del contenedor */
+}
+

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L&H Distribuciones - Dashboard Administrador</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home/panel/admin/AdminDashboard.css') }}">
+</head>
+<body>
+<!-- Contenedor Principal -->
+<div class="main-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h1>L&H Distribuciones</h1>
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="{{ url_for('admin.adminDashboard') }}" class="menu-link active" data-section="bodega">Bodega</a></li>
+                <li><a href="{{ url_for('admin.reports') }}" class="menu-link" data-section="reportes">Reportes</a></li>
+                <li><a href="{{ url_for('admin.employee') }}" class="menu-link" data-section="gestion">Gestión de Empleados</a></li>
+                <li><a href="{{ url_for('admin.settings') }}" class="menu-link" data-section="configuracion">Configuración</a></li>
+            </ul>
+        </nav>
+
+        <!-- Perfil del Usuario -->
+        <div class="user-profile">
+            <img src="{{ url_for('static', filename='images/user-profile.png') }}" alt="Foto de perfil" class="profile-picture">
+            <div class="profile-info">
+                <p class="user-name">Juan Pérez</p>
+                <p class="user-role">Administrador</p>
+            </div>
+        </div>
+        <button class="btn-logout">Cerrar Sesión</button>
+    </aside>
+
+    <!-- Contenido -->
+    <div class="content">
+        <!-- Encabezado -->
+        <div class="header">
+            <h1 class="title">Dashboard Administrador</h1>
+            <p class="subtitle">Bienvenido al sistema de supervisión y control</p>
+        </div>
+
+        <!-- Secciones -->
+        <section id="bodega" class="section active">
+            <h2>Bodega</h2>
+            <p>Supervisa y controla el desempeño del equipo en la bodega.</p>
+            <!-- Tabla de Registros -->
+            <div class="records-section">
+                <h3>Registros de Trabajo</h3>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Empleado</th>
+                        <th>Fecha</th>
+                        <th>Hora de Entrada</th>
+                        <th>Hora de Salida</th>
+                        <th>Total Horas</th>
+                        <th>Horas Extras</th>
+                    </tr>
+                    </thead>
+                    <tbody id="records-table">
+                    <!-- Filas dinámicas -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="reportes" class="section">
+            <h2>Reportes</h2>
+            <p>Aquí puedes generar y consultar reportes de desempeño.</p>
+        </section>
+
+        <section id="gestion" class="section">
+            <h2>Gestión de Empleados</h2>
+            <p>Agrega, edita o elimina empleados en el sistema.</p>
+        </section>
+
+        <section id="configuracion" class="section">
+            <h2>Configuración</h2>
+            <p>Administra las configuraciones generales del sistema.</p>
+        </section>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/home/panel/admin/AdminDashboard.js') }}"></script>
+</body>
+</html>

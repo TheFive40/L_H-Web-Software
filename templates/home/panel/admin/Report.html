@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L&H Distribuciones - Reportes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home/panel/admin/Reports.css') }}">
+</head>
+<body>
+<!-- Contenedor Principal -->
+<div class="main-container">
+    <!-- Encabezado -->
+    <div class="header">
+        <h1 class="title">Reportes</h1>
+        <p class="subtitle">Genera reportes detallados del desempeño de los empleados</p>
+        <a class="btn-back" id="btn-back" href="{{ url_for('admin.adminDashboard') }}">Volver al Menú</a>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filters">
+        <h3>Filtros</h3>
+        <form id="filter-form">
+            <div class="filter-group">
+                <label for="start-date">Fecha de Inicio</label>
+                <input type="date" id="start-date" name="start-date">
+            </div>
+            <div class="filter-group">
+                <label for="end-date">Fecha de Fin</label>
+                <input type="date" id="end-date" name="end-date">
+            </div>
+            <div class="filter-group">
+                <label for="employee">Empleado</label>
+                <select id="employee" name="employee">
+                    <option value="">Todos</option>
+                    <option value="1">Empleado 1</option>
+                    <option value="2">Empleado 2</option>
+                    <option value="3">Empleado 3</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-filter">Generar Reporte</button>
+        </form>
+    </div>
+
+    <!-- Tabla de Reportes -->
+    <div class="reports-section">
+        <h3>Resultados del Reporte</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Empleado</th>
+                <th>Fecha</th>
+                <th>Horas Totales</th>
+                <th>Horas Extras</th>
+            </tr>
+            </thead>
+            <tbody id="reports-table">
+            <!-- Filas dinámicas -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/home/panel/admin/Reports.js') }}"></script>
+</body>
+</html>

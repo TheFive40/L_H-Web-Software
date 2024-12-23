@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L&H Distribuciones - Selección de Usuario</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home/Selection.css') }}">
+</head>
+<body>
+<!-- Banner Superior -->
+<div class="banner">
+    Bienvenido a <span>L&H Distribuciones</span>
+</div>
+
+<!-- Contenedor Principal -->
+<div class="main-container">
+    <!-- Encabezado -->
+    <div class="header">
+        <h1 class="title">¿Cómo deseas ingresar?</h1>
+        <p class="subtitle">Elige tu perfil y accede a las herramientas que necesitas.</p>
+    </div>
+
+    <!-- Opciones de Selección -->
+    <div class="options-container">
+        <!-- Opción Administrador -->
+        <div class="option-card admin" id="admin-option">
+            <div class="icon-container">
+                <img src="https://cdn-icons-png.flaticon.com/512/3106/3106921.png" alt="Administrador">
+            </div>
+            <h2>Administrador</h2>
+            <p>Gestión avanzada para controlar horarios, y reportes de asistencia.</p>
+            <button class="btn-select">Entrar como Administrador</button>
+        </div>
+
+        <!-- Opción Empleado -->
+        <div class="option-card employee" id="employee-option">
+            <div class="icon-container">
+                <img src="https://cdn-icons-png.flaticon.com/512/2920/2920100.png" alt="Empleado">
+            </div>
+            <h2>Empleado</h2>
+            <p>Acceso a herramientas para completar tareas asignadas y verificar horarios.</p>
+            <button class="btn-select">Entrar como Empleado</button>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>© 2024 L&H Distribuciones. Todos los derechos reservados.</p>
+</footer>
+
+<script src="{{ url_for('static', filename='js/home/Selection.js') }}"></script>
+</body>
+</html>

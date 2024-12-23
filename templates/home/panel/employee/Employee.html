@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L&H Distribuciones - Panel del Empleado</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home/panel/employee/Employee.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+<!-- Banner Superior -->
+<div class="banner">
+    Bienvenido, <span>Empleado</span>
+</div>
+
+<!-- Contenedor Principal -->
+<div class="main-container">
+    <div class="welcome-section">
+        <h1>Panel de Control</h1>
+        <p>Registra tu entrada y salida de manera rápida y sencilla.</p>
+    </div>
+
+    <!-- Botones para Registro -->
+    <div class="actions">
+        <button class="btn-action" id="start-work">Registrar Entrada</button>
+        <button class="btn-action" id="end-work">Registrar Salida</button>
+    </div>
+
+    <!-- Historial de Asistencia -->
+    <div class="history">
+        <h2>Historial de Asistencia</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Hora de Entrada</th>
+                <th>Hora de Salida</th>
+            </tr>
+            </thead>
+            <tbody id="history-table">
+            <!-- Filas dinámicas -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/home/panel/employee/Employee.js') }}"></script>
+</body>
+</html>
