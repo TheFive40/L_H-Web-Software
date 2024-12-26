@@ -43,6 +43,36 @@
             </tbody>
         </table>
     </div>
+
+    <!-- Gestión de Empleados -->
+    <div class="employee-management">
+        <button id="add-employee-btn">Agregar Empleado</button>
+
+        <!-- Modal para agregar/editar empleados -->
+        <div id="employee-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="modal-title">Agregar Empleado</h2>
+                <form id="employee-form">
+                    <label for="employee-name">Nombre</label>
+                    <input type="text" id="employee-name" placeholder="Nombre del empleado">
+
+                    <label for="employee-email">Correo</label>
+                    <input type="email" id="employee-email" placeholder="Correo electrónico">
+
+                    <label for="employee-role">Rol</label>
+                    <select id="employee-role">
+                        <option value="admin">Administrador</option>
+                        <option value="staff">Empleado</option>
+                    </select>
+
+                    <div class="modal-buttons">
+                        <button type="submit" id="save-employee-btn">Guardar</button>
+                        <button type="button" id="close-modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="{{ url_for('static', filename='js/home/panel/employee/Employee.js') }}"></script>

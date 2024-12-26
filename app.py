@@ -13,7 +13,7 @@ from model.db import db  # Importa db desde extensions
 app = Flask(__name__)
 app.secret_key = '20050528'
 # Configuración de la base de datos
-DATABASE_URL = "postgresql://postgres:admin@localhost/lh_distribuciones"
+DATABASE_URL = "postgresql://postgres:0219@localhost/lh_distribuciones"
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

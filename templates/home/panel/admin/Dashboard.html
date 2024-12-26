@@ -46,24 +46,56 @@
         <section id="bodega" class="section active">
             <h2>Bodega</h2>
             <p>Supervisa y controla el desempeño del equipo en la bodega.</p>
-            <!-- Tabla de Registros -->
+
             <div class="records-section">
                 <h3>Registros de Trabajo</h3>
-                <table>
+
+                <!-- Barra de búsqueda -->
+                <div class="filters">
+                    <input type="text" id="search-name" placeholder="Buscar por nombre...">
+                    <input type="date" id="start-date">
+                    <input type="date" id="end-date">
+                    <button id="filter-btn">Filtrar</button>
+                </div>
+
+                <!-- Tabla dinámica -->
+                <table class="records-table">
                     <thead>
                     <tr>
                         <th>Empleado</th>
                         <th>Fecha</th>
                         <th>Hora de Entrada</th>
                         <th>Hora de Salida</th>
-                        <th>Total Horas</th>
                         <th>Horas Extras</th>
+                        <th>Acciones</th>
                     </tr>
                     </thead>
                     <tbody id="records-table">
-                    <!-- Filas dinámicas -->
+                    <!-- Aquí se cargarán los registros dinámicamente -->
                     </tbody>
                 </table>
+
+                <!-- Modal para agregar/editar registros -->
+                <div id="record-modal" class="modal">
+                    <div class="modal-content">
+                        <h2 id="modal-title" class="modal-title">Agregar Registro</h2>
+                        <form id="record-form">
+                            <input type="hidden" id="record-id">
+                            <label for="usuario-id">Empleado</label>
+                            <input type="text" id="usuario-id" placeholder="ID de empleado">
+                            <label for="fecha">Fecha</label>
+                            <input type="date" id="fecha">
+                            <label for="hora-entrada">Hora Entrada</label>
+                            <input type="time" id="hora-entrada">
+                            <label for="hora-salida">Hora Salida</label>
+                            <input type="time" id="hora-salida">
+                            <div class="modal-buttons">
+                                <button type="submit" id="save-record-btn" class="btn-action">Guardar</button>
+                                <button id="close-modal" type="button" class="btn-secondary">Cerrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -84,6 +116,7 @@
     </div>
 </div>
 
+<!-- Enlace al archivo de JavaScript -->
 <script src="{{ url_for('static', filename='js/home/panel/admin/AdminDashboard.js') }}"></script>
 </body>
 </html>

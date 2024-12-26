@@ -323,3 +323,264 @@ table td:last-child {
     box-shadow: 0 4px 10px rgba(255, 204, 0, 0.5);
 }
 
+/* Estilo para la barra de búsqueda */
+.filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.filters input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    width: 200px;
+}
+
+.filters input:focus {
+    border-color: #005bb5;
+    box-shadow: 0 4px 8px rgba(0, 91, 181, 0.3);
+}
+
+.filters button {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(90deg, #005bb5, #003f8a);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.filters button:hover {
+    background: linear-gradient(90deg, #ffcc00, #f59e00);
+    color: #003f8a;
+    box-shadow: 0 6px 15px rgba(255, 204, 0, 0.6);
+    transform: scale(1.05);
+}
+
+/* Contenedor del formulario */
+#record-modal {
+    margin-top: 20px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Estilo para los inputs */
+#record-modal form input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: calc(50% - 10px);
+    margin-bottom: 15px;
+    transition: all 0.3s ease-in-out;
+}
+
+#record-modal form input:focus {
+    border-color: #005bb5;
+    box-shadow: 0 4px 8px rgba(0, 91, 181, 0.3);
+}
+
+/* Botones en el formulario */
+#record-modal form button {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(90deg, #005bb5, #003f8a);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+#record-modal form button:hover {
+    background: linear-gradient(90deg, #ffcc00, #f59e00);
+    color: #003f8a;
+    box-shadow: 0 6px 15px rgba(255, 204, 0, 0.6);
+    transform: scale(1.05);
+}
+
+/* Estilo para el botón de cerrar */
+#close-modal {
+    padding: 10px 15px;
+    background: #ef5350;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-top: 10px;
+}
+
+#close-modal:hover {
+    background: #d32f2f;
+    box-shadow: 0 4px 10px rgba(255, 83, 80, 0.5);
+}
+
+/* Botones del modal */
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.modal-buttons button {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+#save-record-btn {
+    background: linear-gradient(90deg, #005bb5, #003f8a);
+}
+
+#save-record-btn:hover {
+    background: linear-gradient(90deg, #ffcc00, #f59e00);
+    color: #003f8a;
+    box-shadow: 0 6px 15px rgba(255, 204, 0, 0.6);
+    transform: scale(1.05);
+}
+
+#close-modal {
+    background: #ef5350;
+}
+
+#close-modal:hover {
+    background: #d32f2f;
+    box-shadow: 0 4px 10px rgba(255, 83, 80, 0.5);
+}
+
+/* Estilos Mejorados para el Formulario Agregar Registro */
+#record-modal {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    margin: auto;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+#record-modal h2 {
+    font-size: 28px;
+    color: #005bb5;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#record-modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#record-modal label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+#record-modal input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+#record-modal input:focus {
+    border-color: #005bb5;
+    box-shadow: 0 4px 10px rgba(0, 91, 181, 0.3);
+    outline: none;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+#save-record-btn {
+    background: linear-gradient(90deg, #005bb5, #003f8a);
+}
+
+#save-record-btn:hover {
+    background: linear-gradient(90deg, #ffcc00, #f59e00);
+    color: #003f8a;
+    box-shadow: 0 6px 15px rgba(255, 204, 0, 0.6);
+    transform: scale(1.05);
+}
+
+#close-modal {
+    background: #ef5350;
+}
+
+#close-modal:hover {
+    background: #d32f2f;
+    box-shadow: 0 4px 10px rgba(255, 83, 80, 0.5);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    #record-modal {
+        width: 90%;
+        padding: 20px;
+    }
+
+    #record-modal h2 {
+        font-size: 24px;
+    }
+
+    #record-modal form {
+        gap: 10px;
+    }
+
+    .modal-buttons button {
+        font-size: 12px;
+        padding: 10px 15px;
+    }
+}
