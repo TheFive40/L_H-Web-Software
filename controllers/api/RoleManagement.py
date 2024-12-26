@@ -5,15 +5,17 @@ from model.entities.Tables import Role
 
 role_management = Blueprint('role_management', __name__)
 
+
 # Obtener todos los roles
 @role_management.route('/all', methods=['GET'])
 def get_all_roles():
     try:
-        roles = Role.query.all()
+        roles = db.session.query(Role).all()
         result = [{"id": role.id, "name": role.nombre, "description": role.descripcion} for role in roles]
         return jsonify({"status": "success", "data": result}), 200
     except SQLAlchemyError as e:
         return jsonify({"status": "error", "message": str(e)}), 500
+
 
 # Agregar un nuevo rol
 @role_management.route('/add', methods=['POST'])
@@ -30,12 +32,13 @@ def add_role():
     except SQLAlchemyError as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
+
 # Actualizar un rol
 @role_management.route('/update/<int:role_id>', methods=['PUT'])
 def update_role(role_id):
     try:
         data = request.json
-        role = Role.query.get(role_id)
+        role = db.session.query(Role).filter_by(id=role_id).first()
         if not role:
             return jsonify({"status": "error", "message": "Role not found"}), 404
 
@@ -46,11 +49,12 @@ def update_role(role_id):
     except SQLAlchemyError as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
+
 # Eliminar un rol
 @role_management.route('/delete/<int:role_id>', methods=['DELETE'])
 def delete_role(role_id):
     try:
-        role = Role.query.get(role_id)
+        role = db.session.query(Role).filter_by(id=role_id).first()
         if not role:
             return jsonify({"status": "error", "message": "Role not found"}), 404
 

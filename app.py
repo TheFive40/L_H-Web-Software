@@ -1,12 +1,15 @@
 from functools import wraps
 
 from flask import Flask, render_template, flash, redirect, url_for, session
+
+from controllers.api.Reports import reports_bp
 from controllers.auth.Auth import auth
 from controllers.home.AdminDashboard import admin
 from controllers.api.Settings import settings
 from controllers.api.WorkRecords import work_records
 from controllers.api.RoleManagement import role_management
 from controllers.api.Auth import authAPI
+from controllers.api.User import user_bp
 from decorators import login_required
 from model.db import db  # Importa db desde extensions
 
@@ -31,6 +34,8 @@ app.register_blueprint(settings, url_prefix="/api/settings")
 app.register_blueprint(work_records, url_prefix="/api/work-records")
 app.register_blueprint(authAPI, url_prefix="/api/auth")
 app.register_blueprint(role_management, url_prefix="/api/roles")
+app.register_blueprint(user_bp, url_prefix='/api/user')
+app.register_blueprint(reports_bp, url_prefix='/api/report')
 
 
 # Rutas base para vistas
