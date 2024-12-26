@@ -24,3 +24,8 @@ def employee():
 @admin.route("/settings")
 def settings():
     return render_template("home/panel/admin/Settings.html")
+
+
+@admin.route("/employee/register")
+def employeeRegister():
+    return render_template('home/panel/admin/forms/EmployeeRegister.html')

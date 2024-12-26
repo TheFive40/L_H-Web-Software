@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Nuevo Empleado</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/home/panel/admin/forms/EmployeeRegister.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/static/js/home/panel/admin/forms/EmployeeRegister.js" defer></script>
+</head>
+<body>
+<div class="form-container">
+    <h2>Crear Nuevo Empleado</h2>
+    <form id="create-employee-form">
+        <div class="form-group">
+            <label for="nombre">Nombre Completo</label>
+            <input type="text" id="nombre" name="nombre_completo" placeholder="Ingrese el nombre completo" required>
+        </div>
+        <div class="form-group">
+            <label for="correo">Correo Electrónico</label>
+            <input type="email" id="correo" name="correo" placeholder="Ingrese el correo electrónico" required>
+        </div>
+        <div class="form-group">
+            <label for="contrasena">Contraseña</label>
+            <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese una contraseña" required>
+        </div>
+        <div class="form-group">
+            <label for="foto_perfil">Foto de Perfil</label>
+            <input type="file" id="foto_perfil" name="foto_perfil" accept="image/*">
+        </div>
+        <div class="form-group">
+            <label for="rol">Rol</label>
+            <select id="rol" name="rol" required>
+                <option value="" disabled selected>Seleccione un rol</option>
+                <!-- Opciones dinámicas -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="creado_en">Fecha de Creación</label>
+            <input type="text" id="creado_en" name="creado_en" readonly>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-submit">Crear Empleado</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L&H Distribuciones - Gestión de Empleados</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home/panel/admin/EmployeeManagement.css') }}">
 </head>
 <body>
@@ -20,12 +22,19 @@
 
     <!-- Botón para Agregar Empleado -->
     <div class="actions">
-        <button class="btn-add" id="btn-add-employee">Agregar Empleado</button>
+        <a class="btn-add" id="btn-add-employee" href="{{ url_for('admin.employeeRegister') }}">Agregar Empleado</a>
     </div>
 
     <!-- Tabla de Empleados -->
     <div class="employees-section">
         <h3>Lista de Empleados</h3>
+        <div class="filter-container">
+            <input type="text" id="search-input" placeholder="Buscar empleados..." class="search-bar">
+            <select id="filter-select" class="filter-dropdown">
+                <option value="nombre_completo">Nombre</option>
+                <option value="rol">Cargo</option>
+            </select>
+        </div>
         <table>
             <thead>
             <tr>
@@ -40,6 +49,7 @@
             <!-- Filas dinámicas -->
             </tbody>
         </table>
+        <div id="pagination" class="pagination-container"></div>
     </div>
 </div>
 

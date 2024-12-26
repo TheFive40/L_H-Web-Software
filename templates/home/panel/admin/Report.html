@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L&H Distribuciones - Reportes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home/panel/admin/Reports.css') }}">
 </head>
 <body>
@@ -22,22 +26,23 @@
         <form id="filter-form">
             <div class="filter-group">
                 <label for="start-date">Fecha de Inicio</label>
-                <input type="date" id="start-date" name="start-date">
+                <input type="date" id="start-date" name="start-date" placeholder="yyyy-mm-dd">
             </div>
             <div class="filter-group">
                 <label for="end-date">Fecha de Fin</label>
-                <input type="date" id="end-date" name="end-date">
+                <input type="date" id="end-date" name="end-date" placeholder="yyyy-mm-dd">
             </div>
             <div class="filter-group">
                 <label for="employee">Empleado</label>
                 <select id="employee" name="employee">
                     <option value="">Todos</option>
-                    <option value="1">Empleado 1</option>
-                    <option value="2">Empleado 2</option>
-                    <option value="3">Empleado 3</option>
                 </select>
             </div>
-            <button type="submit" class="btn-filter">Generar Reporte</button>
+            <div class="buttons-container">
+                <button type="submit" class="btn-filter">Generar Reporte</button>
+                <button type="button" id="export-btn" class="btn-export">Exportar a Excel</button>
+            </div>
+
         </form>
     </div>
 
@@ -49,6 +54,8 @@
             <tr>
                 <th>Empleado</th>
                 <th>Fecha</th>
+                <th>Hora Entrada</th>
+                <th>Hora Salida</th>
                 <th>Horas Totales</th>
                 <th>Horas Extras</th>
             </tr>

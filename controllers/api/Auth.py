@@ -116,3 +116,5 @@ def get_user_info():
         return jsonify({"status": "error", "message": f"Database error: {str(e)}"}), 500
     except Exception as e:
         return jsonify({"status": "error", "message": f"Unexpected error: {str(e)}"}), 500
+
+
