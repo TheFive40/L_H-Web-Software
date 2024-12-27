@@ -263,3 +263,22 @@ table {
 .btn-export:hover {
     background-color: #cc8400; /* Anaranjado más oscuro en hover */
 }
+.pagination-button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    background: #f4f4f4;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pagination-button.active {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+}
+
+.pagination-button:hover:not(.active) {
+    background-color: #0056b3;
+    color: #fff;
+}

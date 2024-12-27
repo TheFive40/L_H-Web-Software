@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L&H Distribuciones - Dashboard Administrador</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home/panel/admin/AdminDashboard.css') }}">
 </head>
 <body>
@@ -25,7 +27,7 @@
 
         <!-- Perfil del Usuario -->
         <div class="user-profile">
-            <img src="{{ url_for('static', filename='images/user-profile.png') }}" alt="Foto de perfil" class="profile-picture">
+            <img class="profile-picture">
             <div class="profile-info">
                 <p class="user-name">Juan Pérez</p>
                 <p class="user-role">Administrador</p>

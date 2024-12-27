@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask import Blueprint, jsonify, request
 from sqlalchemy.exc import SQLAlchemyError
-from model.entities.Tables import WorkRecord, User
+from model.entities.Tables import WorkRecord, User, Configuration
 from model.db import db
 
 work_records = Blueprint('work_records', __name__)
@@ -129,13 +129,16 @@ def get_user_history(user_id):
 @work_records.route("/work/end/<int:usuario_id>", methods=["PUT"])
 def end_work(usuario_id):
     """
-    Registrar la hora de salida.
+    Registrar la hora de salida y calcular horas extras según configuración.
     """
     try:
         from datetime import date, datetime
 
         # Fecha actual
         today = date.today()
+
+        # Obtener el valor de las horas de jornada laboral desde la configuración
+        jornada_laboral = get_config_value('horas_jornada_laboral', default=8)
 
         # Buscar el registro de trabajo del día actual para este usuario
         record = db.session.query(WorkRecord).filter_by(usuario_id=usuario_id, fecha=today).first()
@@ -154,7 +157,7 @@ def end_work(usuario_id):
             tiempo_trabajado = datetime.combine(today, record.hora_salida) - datetime.combine(today,
                                                                                               record.hora_entrada)
             horas_trabajadas = tiempo_trabajado.total_seconds() / 3600
-            record.horas_extras = max(0, horas_trabajadas - 8)  # Calcular extras si exceden 8 horas
+            record.horas_extras = max(0, horas_trabajadas - jornada_laboral)  # Calcular extras según la configuración
 
         # Guardar los cambios en la base de datos
         db.session.commit()
@@ -164,3 +167,20 @@ def end_work(usuario_id):
     except SQLAlchemyError as e:
         db.session.rollback()  # Deshacer cambios en caso de error
         return jsonify({"status": "error", "message": f"Error en la base de datos: {str(e)}"}), 500
+
+
+def get_config_value(key, default=None):
+    """
+    Obtener el valor de una configuración desde la base de datos.
+    :param key: Clave de la configuración.
+    :param default: Valor predeterminado si no se encuentra la configuración.
+    :return: Valor de la configuración o valor predeterminado.
+    """
+    try:
+        config = db.session.query(Configuration).filter_by(clave=key).first()
+        if config:
+            return float(config.valor)  # Asegúrate de convertirlo a un número flotante
+        return default
+    except SQLAlchemyError as e:
+        print(f"Error al obtener configuración {key}: {e}")
+        return default

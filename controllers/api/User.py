@@ -130,6 +130,7 @@ def get_current_user():
             "id": user.id,
             "nombre_completo": user.nombre_completo,
             "correo": user.correo,
-            "cargo": role_name  # Nombre del rol asociado
+            "cargo": role_name,  # Nombre del rol asociado
+            "foto_perfil": user.foto_perfil
         }
     }), 200

@@ -118,3 +118,13 @@ def get_user_info():
         return jsonify({"status": "error", "message": f"Unexpected error: {str(e)}"}), 500
 
 
+@authAPI.route('/logout', methods=['POST'])
+def logout():
+    """
+    Cierra la sesión del usuario actual eliminando los datos almacenados en la sesión.
+    """
+    try:
+        session.clear()  # Elimina todos los datos de la sesión
+        return jsonify({"status": "success", "message": "Sesión cerrada correctamente"}), 200
+    except Exception as e:
+        return jsonify({"status": "error", "message": f"Error al cerrar sesión: {str(e)}"}), 500
