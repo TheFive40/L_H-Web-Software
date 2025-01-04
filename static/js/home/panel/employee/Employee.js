@@ -51,7 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     });
 
-    // Cargar historial de trabajo
     async function loadHistory() {
         try {
             const userId = await getUserInfo();
@@ -59,7 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = await response.json();
 
             if (data.status === "success" && Array.isArray(data.records)) {
-                records = data.records;
+                records = data.records.sort((a, b) => new Date(b.date) - new Date(a.date));
+
                 displayPage(currentPage);
                 createPaginationButtons();
             } else {
@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error al cargar el historial:", error);
         }
     }
+
 
     // Mostrar registros para la página actual
     function displayPage(page) {

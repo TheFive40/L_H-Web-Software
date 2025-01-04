@@ -323,3 +323,126 @@ table td:last-child {
     box-shadow: 0 4px 10px rgba(255, 204, 0, 0.5);
 }
 
+.btn-update,
+.btn-delete {
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-update {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-update:hover {
+    background-color: #45a049;
+}
+
+.btn-delete {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #d32f2f;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 5px;
+}
+
+.pagination button {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pagination button:hover {
+    background-color: #007BFF;
+    color: white;
+}
+
+.pagination button.active {
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+.pagination button:disabled {
+    background-color: #e0e0e0;
+    color: #aaa;
+    cursor: not-allowed;
+}
+/* Contenedor de filtros */
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Inputs de los filtros */
+.filters input[type="text"],
+.filters input[type="number"],
+.filters input[type="date"] {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 150px;
+    transition: border-color 0.3s ease;
+}
+
+.filters input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Botones de los filtros */
+.filters button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filters #apply-filters {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.filters #apply-filters:hover {
+    background-color: #0056b3;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.filters #clear-filters {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.filters #clear-filters:hover {
+    background-color: #d32f2f;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

@@ -64,37 +64,42 @@ def add_work_record():
         return jsonify({"status": "error", "message": f"Error en la base de datos: {str(e)}"}), 500
 
 
-# Actualizar un registro por fecha
-@work_records.route('/update/<string:date>', methods=['PUT'])
-def update_record(date):
+@work_records.route('/update/<int:record_id>', methods=['PUT'])
+def update_record(record_id):
     try:
         data = request.json
-        if not data or 'user_id' not in data:
-            return jsonify({"status": "error", "message": "Invalid data"}), 400
+        print(f"Datos recibidos para actualizar: {data}")  # Log para verificar los datos
 
-        record = db.session.query.filter_by(fecha=date, usuario_id=data['user_id']).first()
+        # Busca el registro en la base de datos
+        record = db.session.query(WorkRecord).filter_by(id=record_id).first()
         if not record:
             return jsonify({"status": "error", "message": "Record not found"}), 404
 
+        # Log para verificar el registro encontrado
+        print(f"Registro antes de la actualización: {record.__dict__}")
+
+        # Actualizar solo los campos proporcionados
         record.hora_entrada = data.get('check_in', record.hora_entrada)
         record.hora_salida = data.get('check_out', record.hora_salida)
         record.horas_extras = data.get('extra_hours', record.horas_extras)
 
+        # Confirmar cambios
         db.session.commit()
+
+        # Log para confirmar los cambios
+        print(f"Registro actualizado: {record.__dict__}")
+
         return jsonify({"status": "success", "message": "Work record updated successfully"}), 200
     except SQLAlchemyError as e:
+        db.session.rollback()  # Revertir cambios en caso de error
+        print(f"Error al actualizar: {str(e)}")
         return jsonify({"status": "error", "message": str(e)}), 500
 
 
-# Eliminar un registro por fecha
-@work_records.route('/delete/<string:date>', methods=['DELETE'])
-def delete_record(date):
+@work_records.route('/delete/<int:record_id>', methods=['DELETE'])
+def delete_record(record_id):
     try:
-        data = request.json
-        if not data or 'user_id' not in data:
-            return jsonify({"status": "error", "message": "Invalid data"}), 400
-
-        record = WorkRecord.query.filter_by(fecha=date, usuario_id=data['user_id']).first()
+        record = db.session.query(WorkRecord).filter_by(id=record_id).first()
         if not record:
             return jsonify({"status": "error", "message": "Record not found"}), 404
 
@@ -102,6 +107,7 @@ def delete_record(date):
         db.session.commit()
         return jsonify({"status": "success", "message": "Work record deleted successfully"}), 200
     except SQLAlchemyError as e:
+        db.session.rollback()
         return jsonify({"status": "error", "message": str(e)}), 500
 
 
