@@ -446,68 +446,102 @@ table td:last-child {
     background-color: #d32f2f;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-@media (max-width: 1024px) {
-    .sidebar {
-        width: 200px;
-    }
-    .content {
-        padding: 20px;
-    }
-    .menu-link {
-        font-size: 14px;
-        padding: 10px 15px;
-    }
-}
-
 @media (max-width: 768px) {
-    .main-container {
-        flex-direction: column;
-    }
     .sidebar {
         width: 100%;
         height: auto;
-        box-shadow: none;
+        background: linear-gradient(135deg, #003f8a, #005bb5);
+        color: #ffffff;
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
     }
+
+    .menu {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+
     .menu-link {
-        text-align: center;
-    }
-    .content {
-        padding: 15px;
-    }
-    table th, table td {
-        padding: 10px;
+        padding: 10px 20px;
         font-size: 14px;
+        font-weight: bold;
+        border-radius: 8px;
+    }
+
+    .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 15px 0;
+        align-items: center;
+        background-color: #f9f9f9;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .filters input[type="text"],
+    .filters input[type="number"],
+    .filters input[type="date"] {
+        padding: 10px;
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .filters button {
+        width: 100%;
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    .pagination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .pagination button {
+        padding: 10px 15px;
+        font-size: 14px;
+        border-radius: 5px;
     }
 }
 
 @media (max-width: 480px) {
-    .title {
-        font-size: 28px;
-    }
     .menu-link {
         font-size: 12px;
         padding: 8px 10px;
     }
+
     .btn-action {
         font-size: 14px;
         padding: 10px 15px;
     }
+
     .filters input[type="text"],
     .filters input[type="number"],
     .filters input[type="date"] {
         width: 100%;
     }
+
     .filters button {
         width: 100%;
     }
-}
-.sidebar {
-    width: 250px;
-    background: linear-gradient(135deg, #003f8a, #005bb5);
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+
+    .pagination {
+        gap: 5px;
+    }
+
+    .pagination button {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
 }
