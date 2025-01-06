@@ -14,7 +14,7 @@ body {
 
 /* Contenedor Principal */
 .main-container {
-    position: relative; /* Para que el botón quede dentro */
+    position: relative;
     background: #ffffff;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -22,7 +22,7 @@ body {
     max-width: 800px;
     padding: 40px;
     animation: fadeIn 1s ease-in-out;
-    overflow: hidden; /* Evitar que el contenido se desborde */
+    overflow: hidden;
 }
 
 @keyframes fadeIn {
@@ -96,14 +96,14 @@ body {
 
 /* Ajuste General de los Inputs */
 input, select {
-    width: 100%; /* Asegurar que el ancho se ajuste correctamente */
-    box-sizing: border-box; /* Evitar desbordamientos al calcular padding */
+    width: 100%;
+    box-sizing: border-box;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ddd;
     font-size: 16px;
     transition: all 0.3s ease;
-    margin-top: 5px; /* Añadir margen para separar el campo del label */
+    margin-top: 5px;
 }
 
 input:focus, select:focus {
@@ -116,7 +116,7 @@ input:focus, select:focus {
 .form-group {
     margin-bottom: 20px;
     display: flex;
-    flex-direction: column; /* Asegura que label y input estén alineados */
+    flex-direction: column;
 }
 
 label {
@@ -126,7 +126,7 @@ label {
     margin-bottom: 5px;
 }
 
-
+/* Botón Guardar */
 .btn-save {
     background: #005bb5;
     color: #ffffff;
@@ -145,4 +145,73 @@ label {
     background: #003f8a;
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsividad */
+
+/* Ajustes para pantallas medianas */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 20px;
+    }
+
+    .title {
+        font-size: 30px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+    }
+
+    .settings-section h3 {
+        font-size: 20px;
+    }
+
+    input, select {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .btn-save {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 480px) {
+    .main-container {
+        padding: 15px;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    .settings-section {
+        padding: 15px;
+    }
+
+    .settings-section h3 {
+        font-size: 18px;
+    }
+
+    input, select {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .btn-save {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .btn-back {
+        padding: 8px 15px;
+        font-size: 12px;
+    }
 }

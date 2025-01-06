@@ -476,13 +476,13 @@ table {
     }
 
     .buttons-container {
-        justify-content: center; /* Centrar los botones en pantallas pequeñas */
-        margin-left: 0; /* Quitar la alineación a la derecha */
+        justify-content: center;
+        margin-left: 0;
     }
 
     .btn-filter,
     .btn-export {
-        width: 100%; /* Los botones ocupan todo el ancho */
+        width: 100%;
         text-align: center;
     }
 }
