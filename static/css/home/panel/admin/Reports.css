@@ -389,91 +389,80 @@ table {
         padding: 8px 10px;
     }
 }
+/* Ajuste del botón "Volver al Menú" */
+.btn-back {
+    position: relative; /* Cambiar a relative para que respete el flujo del documento */
+    display: inline-block; /* Asegurar que el botón no ocupe más espacio del necesario */
+    margin-bottom: 20px; /* Separación con los elementos inferiores */
+    padding: 10px 15px;
+    font-size: 14px;
+    background: linear-gradient(90deg, #ffcc00, #f59e00);
+    color: #003f8a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-back:hover {
+    background: linear-gradient(90deg, #f59e00, #ff9800);
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Ajuste del contenedor de filtros para pantallas pequeñas */
 @media (max-width: 768px) {
     .filters {
-        padding: 10px;
+        padding: 15px;
+        display: flex;
+        flex-wrap: wrap;
         gap: 10px;
+        align-items: flex-start;
     }
 
     .filter-group {
-        width: 100%;
+        width: calc(50% - 10px); /* Los inputs ocupan el 50% del contenedor menos el gap */
     }
 
     .filter-group input, .filter-group select {
-        width: 100%;
-        padding: 8px;
+        width: 90%; /* Asegurar que los inputs no se salgan del contenedor */
         font-size: 14px;
+        padding: 8px;
     }
 
     .buttons-container {
+        width: 90%; /* Los botones ocupan todo el ancho en pantallas pequeñas */
+        display: flex;
         flex-direction: column;
         gap: 10px;
     }
 
     .btn-filter, .btn-export {
-        width: 100%;
+        width: 90%;
+        padding: 10px;
         font-size: 14px;
-        padding: 10px;
-    }
-
-    .reports-section h3 {
-        font-size: 20px;
-        text-align: center;
-    }
-
-    table {
-        font-size: 12px;
-    }
-
-    table th, table td {
-        padding: 10px;
-        font-size: 12px;
-    }
-
-    .pagination-button {
-        padding: 8px 10px;
-        font-size: 12px;
     }
 }
 
 @media (max-width: 480px) {
-    .main-container {
-        padding: 10px;
-        width: 100%;
-    }
-
-    .title {
-        font-size: 22px;
-    }
-
     .filters {
         flex-direction: column;
         gap: 8px;
     }
 
+    .filter-group {
+        width: 90%; /* Inputs ocupan todo el ancho en pantallas muy pequeñas */
+    }
+
     .filter-group input, .filter-group select {
-        font-size: 12px;
         padding: 8px;
+        font-size: 12px;
     }
 
     .btn-filter, .btn-export {
-        padding: 8px;
         font-size: 12px;
-    }
-
-    table {
-        overflow-x: auto;
-        display: block;
-        white-space: nowrap;
-    }
-
-    table th, table td {
-        font-size: 10px;
-        padding: 6px;
-    }
-
-    .pagination-button {
-        font-size: 10px;
-        padding: 6px;
+        padding: 8px;
     }
 }
