@@ -412,7 +412,6 @@ table {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Ajuste del contenedor de filtros para pantallas pequeñas */
 @media (max-width: 768px) {
     .filters {
         padding: 15px;
@@ -423,17 +422,17 @@ table {
     }
 
     .filter-group {
-        width: calc(50% - 10px); /* Los inputs ocupan el 50% del contenedor menos el gap */
+        width: calc(50% - 10px);
     }
 
     .filter-group input, .filter-group select {
-        width: 90%; /* Asegurar que los inputs no se salgan del contenedor */
+        width: 90%;
         font-size: 14px;
         padding: 8px;
     }
 
     .buttons-container {
-        width: 90%; /* Los botones ocupan todo el ancho en pantallas pequeñas */
+        width: 90%;
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -453,7 +452,7 @@ table {
     }
 
     .filter-group {
-        width: 90%; /* Inputs ocupan todo el ancho en pantallas muy pequeñas */
+        width: 90%;
     }
 
     .filter-group input, .filter-group select {
