@@ -38,7 +38,6 @@ function loadRolesIntoSelect() {
 function createEmployee(event) {
     event.preventDefault();
 
-    // Obtener datos del formulario
     const nombre = document.getElementById('nombre').value.trim();
     const correo = document.getElementById('correo').value.trim();
     const contrasena = document.getElementById('contrasena').value.trim();
@@ -54,11 +53,10 @@ function createEmployee(event) {
         return;
     }
 
-    // Convertir la foto de perfil a Base64 si existe
     if (fotoPerfil) {
         const reader = new FileReader();
         reader.onload = () => {
-            const fotoBase64 = reader.result.split(',')[1]; // Eliminar el prefijo "data:image/png;base64,"
+            const fotoBase64 = reader.result.split(',')[1];
             const newEmployee = {
                 nombre_completo: nombre,
                 correo: correo,
@@ -68,7 +66,7 @@ function createEmployee(event) {
             };
             enviarDatosAlServidor(newEmployee);
         };
-        reader.readAsDataURL(fotoPerfil); // Leer archivo como Base64
+        reader.readAsDataURL(fotoPerfil);
     } else {
         const newEmployee = {
             nombre_completo: nombre,

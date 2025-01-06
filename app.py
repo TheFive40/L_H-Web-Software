@@ -11,23 +11,19 @@ from controllers.api.RoleManagement import role_management
 from controllers.api.Auth import authAPI
 from controllers.api.User import user_bp
 from decorators import login_required
-from model.db import db  # Importa db desde extensions
+from model.db import db
 
 app = Flask(__name__)
 app.secret_key = '20050528'
-# Configuración de la base de datos
-DATABASE_URL = "postgresql://postgres:admin@localhost/lh_distribuciones"
+DATABASE_URL = "postgresql://postgres:ACDQEJUpWEACGVLbeEqTcyuwTUKeKzeu@viaduct.proxy.rlwy.net:43367/railway"
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Inicializar la base de datos
 db.init_app(app)
 
-# Crear tablas al iniciar la app
 with app.app_context():
-    db.create_all()  # Crear todas las tablas usando Flask-SQLAlchemy
+    db.create_all()
 
-# Registro de Blueprints con prefijo /api/
 app.register_blueprint(auth, url_prefix="/auth")
 app.register_blueprint(admin, url_prefix="/admin")
 app.register_blueprint(settings, url_prefix="/api/settings")
