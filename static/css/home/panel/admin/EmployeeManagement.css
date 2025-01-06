@@ -566,3 +566,26 @@ input:focus, select:focus {
         overflow-x: auto; /* Permitir desplazamiento horizontal */
     }
 }
+/* Posicionar el botón "Volver al Menú" de manera fija pero sin estorbar */
+.btn-back {
+    position: relative; /* Cambiar de fixed a relative para que no flote sobre otros elementos */
+    display: inline-block; /* Alinear correctamente con otros elementos */
+    margin-bottom: 20px; /* Espacio inferior para separarlo del encabezado */
+    font-size: 14px;
+    padding: 10px 15px;
+    background: linear-gradient(90deg, #ffcc00, #f59e00);
+    color: #003f8a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover effect para el botón */
+.btn-back:hover {
+    background: linear-gradient(90deg, #f59e00, #ff9800);
+    transform: scale(1.05); /* Pequeño zoom al pasar el cursor */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
