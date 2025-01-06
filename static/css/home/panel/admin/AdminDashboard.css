@@ -447,9 +447,7 @@ table td:last-child {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* CSS Responsivo */
 
-/* Ajustes para tablets (pantallas entre 768px y 1024px) */
 @media (max-width: 1024px) {
     .sidebar {
         width: 220px;
@@ -472,7 +470,6 @@ table td:last-child {
     }
 }
 
-/* Ajustes para pantallas pequeñas (pantallas entre 480px y 768px) */
 @media (max-width: 768px) {
     .main-container {
         flex-direction: column;
@@ -510,7 +507,6 @@ table td:last-child {
     }
 }
 
-/* Ajustes para pantallas extra pequeñas (pantallas menores a 480px) */
 @media (max-width: 480px) {
     .sidebar {
         padding: 5px;
@@ -557,7 +553,6 @@ table td:last-child {
     }
 }
 
-/* Mejoras para pantallas en modo horizontal (móviles en modo paisaje) */
 @media (orientation: landscape) and (max-height: 500px) {
     .sidebar {
         width: 180px;
@@ -573,15 +568,14 @@ table td:last-child {
         font-size: 20px;
     }
 }
-/* Diseño general en pantallas pequeñas (máximo 768px) */
 @media (max-width: 768px) {
     .main-container {
-        flex-direction: column; /* Cambiar el diseño a una columna */
+        flex-direction: column;
     }
 
     .sidebar {
-        width: 100%; /* Sidebar ocupa toda la pantalla */
-        box-shadow: none; /* Quitar sombra en pantallas pequeñas */
+        width: 100%;
+        box-shadow: none;
     }
 
     .content {
@@ -589,17 +583,17 @@ table td:last-child {
     }
 
     .filters {
-        flex-wrap: wrap; /* Los filtros se alinean en varias filas */
-        gap: 5px; /* Menor espacio entre filtros */
+        flex-wrap: wrap;
+        gap: 5px;
     }
 
     .filters input,
     .filters button {
-        width: 100%; /* Inputs y botones ocupan todo el ancho */
+        width: 100%;
     }
 
     .table-container {
-        overflow-x: auto; /* Agregar scroll horizontal a la tabla si es necesario */
+        overflow-x: auto;
     }
 
     table th,
@@ -614,7 +608,6 @@ table td:last-child {
     }
 }
 
-/* Pantallas muy pequeñas (máximo 480px) */
 @media (max-width: 480px) {
     .title {
         font-size: 20px;
@@ -625,7 +618,7 @@ table td:last-child {
     }
 
     .filters {
-        flex-direction: column; /* Filtros en una sola columna */
+        flex-direction: column;
     }
 
     table th,
@@ -640,7 +633,7 @@ table td:last-child {
     }
 
     .btn-logout {
-        padding: 10px; /* Reducir padding */
+        padding: 10px;
         font-size: 14px;
     }
 
@@ -650,14 +643,13 @@ table td:last-child {
     }
 }
 
-/* Pantallas entre 1024px y 768px */
 @media (max-width: 1024px) and (min-width: 768px) {
     .sidebar {
-        width: 200px; /* Reducir ancho de sidebar */
+        width: 200px;
     }
 
     .content {
-        padding: 20px; /* Menor padding para contenido */
+        padding: 20px;
     }
 
     .filters input {
@@ -670,10 +662,9 @@ table td:last-child {
     }
 }
 
-/* Ajustes para orientación horizontal */
 @media (orientation: landscape) and (max-height: 500px) {
     .sidebar {
-        width: 150px; /* Sidebar más pequeño */
+        width: 150px;
     }
 
     .filters {
@@ -682,10 +673,10 @@ table td:last-child {
     }
 
     .filters input {
-        width: 45%; /* Dos inputs por fila */
+        width: 45%;
     }
 
     .filters button {
-        width: 45%; /* Botones en la misma fila */
+        width: 45%;
     }
 }

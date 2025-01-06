@@ -349,3 +349,141 @@ input:focus, select:focus {
     border-radius: 4px;
     font-size: 14px;
 }
+
+/* Ajustes para pantallas entre 1024px y 768px (Tablets) */
+@media (max-width: 1024px) {
+    .main-container {
+        padding: 30px;
+        width: 95%;
+    }
+
+    .title {
+        font-size: 28px;
+    }
+
+    .btn-add {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    .search-bar, .filter-dropdown {
+        width: 48%; /* Reducir ancho de los filtros para que quepan en una fila */
+    }
+
+    table th, table td {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .btn-edit, .btn-delete {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+/* Ajustes para pantallas entre 768px y 480px (Smartphones grandes) */
+@media (max-width: 768px) {
+    .header {
+        margin-bottom: 20px;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    .btn-add {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .filter-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-bar, .filter-dropdown {
+        width: 100%;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    table th, table td {
+        padding: 8px 10px;
+    }
+
+    .btn-edit, .btn-delete {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .pagination-button {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}
+
+/* Ajustes para pantallas menores a 480px (Smartphones pequeños) */
+@media (max-width: 480px) {
+    .main-container {
+        padding: 20px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    .btn-add {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .filter-container {
+        gap: 5px;
+    }
+
+    table th, table td {
+        font-size: 10px;
+        padding: 6px;
+    }
+
+    .btn-edit, .btn-delete {
+        font-size: 10px;
+        padding: 5px 10px;
+    }
+
+    .pagination-button {
+        font-size: 10px;
+        padding: 5px 8px;
+    }
+}
+
+/* Ajustes para pantallas en modo horizontal (landscape) */
+@media (orientation: landscape) and (max-height: 500px) {
+    .main-container {
+        padding: 15px;
+    }
+
+    .btn-add {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    table th, table td {
+        padding: 8px;
+    }
+
+    .pagination-button {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
