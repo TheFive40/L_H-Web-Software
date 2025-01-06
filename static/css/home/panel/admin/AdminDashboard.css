@@ -544,7 +544,7 @@ table td:last-child {
     .filters input[type="text"],
     .filters input[type="number"],
     .filters input[type="date"] {
-        width: 100%;
+        width: 90%;
         margin-bottom: 10px;
     }
     .filters button {
@@ -587,11 +587,13 @@ table td:last-child {
         gap: 5px;
     }
 
-    .filters input,
     .filters button {
         width: 100%;
     }
-
+    .filters input{
+        width: 80%;
+        margin-right: 10px;
+    }
     .table-container {
         overflow-x: auto;
     }
@@ -641,6 +643,7 @@ table td:last-child {
         font-size: 12px;
         padding: 8px;
     }
+
 }
 
 @media (max-width: 1024px) and (min-width: 768px) {
