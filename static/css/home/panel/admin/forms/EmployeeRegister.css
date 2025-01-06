@@ -1,6 +1,5 @@
-/* Fondo de la página */
 body {
-    background: linear-gradient(to right, #1e88e5, #64b5f6); /* Degradado azul */
+    background: linear-gradient(to right, #1e88e5, #64b5f6);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -9,32 +8,29 @@ body {
     font-family: 'Arial', sans-serif;
 }
 
-/* Contenedor del formulario */
 .form-container {
-    max-width: 600px; /* Ancho del contenedor */
+    max-width: 600px;
     margin: 50px auto;
-    padding: 40px; /* Espaciado interno */
-    background-color: #ffffff; /* Fondo blanco */
+    padding: 40px;
+    background-color: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     color: #333333;
 }
 
-/* Título del formulario */
 .form-container h2 {
     font-size: 26px;
-    color: #1e88e5; /* Azul corporativo */
-    text-align: center; /* Título centrado */
+    color: #1e88e5;
+    text-align: center;
     margin-bottom: 20px;
     font-weight: bold;
 }
 
-/* Grupo de formulario */
 .form-group {
     margin-bottom: 20px;
-    display: grid; /* Usamos grid para alinear mejor */
-    grid-template-columns: 150px 1fr; /* Etiquetas e inputs */
-    align-items: center; /* Centra verticalmente */
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    align-items: center;
 }
 
 .form-group label {
@@ -43,36 +39,37 @@ body {
     color: #333333;
 }
 
-.form-group input{
-    width: 100%; /* Asegura que los inputs y el combo box tengan el mismo ancho */
-    padding: 10px; /* Más altura */
+.form-group input {
+    width: 95%;
+    padding: 10px;
     border: 1px solid #dcdcdc;
     border-radius: 8px;
     font-size: 14px;
     background-color: #f9f9f9;
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
-.form-group select{
-    width: 107%; /* Asegura que los inputs y el combo box tengan el mismo ancho */
-    padding: 10px; /* Más altura */
+
+.form-group select {
+    width: 102%;
+    padding: 10px;
     border: 1px solid #dcdcdc;
     border-radius: 8px;
     font-size: 14px;
     background-color: #f9f9f9;
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
+
 .form-group input:focus,
 .form-group select:focus {
-    border-color: #1e88e5; /* Azul corporativo */
+    border-color: #1e88e5;
     background-color: #ffffff;
     outline: none;
 }
 
-/* Botón */
 .btn-submit {
-    width: 100%; /* Ocupa todo el ancho */
-    padding: 15px 0; /* Botón más alto */
-    background-color: #1e88e5; /* Azul corporativo */
+    width: 100%;
+    padding: 15px 0;
+    background-color: #1e88e5;
     color: #ffffff;
     font-size: 16px;
     font-weight: bold;
@@ -80,7 +77,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: 20px; /* Separación del botón */
+    margin-top: 20px;
 }
 
 .btn-submit:hover {
@@ -88,10 +85,10 @@ body {
     transform: scale(1.02);
 }
 
-/* Estilo responsivo */
+/* Pantallas pequeñas */
 @media (max-width: 768px) {
     .form-container {
-        max-width: 90%; /* Ajusta el tamaño en pantallas pequeñas */
+        max-width: 90%;
         padding: 20px;
     }
 
@@ -100,7 +97,7 @@ body {
     }
 
     .form-group {
-        grid-template-columns: 1fr; /* Etiquetas e inputs apilados */
+        grid-template-columns: 1fr;
     }
 
     .form-group label {
@@ -114,5 +111,27 @@ body {
 
     .btn-submit {
         font-size: 14px;
+    }
+}
+
+/* Pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .form-container {
+        padding: 15px;
+    }
+
+    .form-container h2 {
+        font-size: 20px;
+    }
+
+    .form-group input,
+    .form-group select {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .btn-submit {
+        padding: 12px 0;
+        font-size: 12px;
     }
 }
