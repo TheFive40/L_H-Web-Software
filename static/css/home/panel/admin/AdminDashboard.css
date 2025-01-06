@@ -446,83 +446,130 @@ table td:last-child {
     background-color: #d32f2f;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-/* Diseño estándar para pantallas grandes (PC) */
-.sidebar {
-    width: 250px;
-    background: linear-gradient(135deg, #003f8a, #005bb5);
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease-in-out;
+
+/* CSS Responsivo */
+
+/* Ajustes para tablets (pantallas entre 768px y 1024px) */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 220px;
+    }
+    .sidebar:hover {
+        width: 240px;
+    }
+    .menu-link {
+        font-size: 14px;
+        padding: 12px 15px;
+    }
+    .content {
+        padding: 30px;
+    }
+    .title {
+        font-size: 30px;
+    }
+    .subtitle {
+        font-size: 16px;
+    }
 }
 
-.menu {
-    width: 100%;
-}
-
-.menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.menu-link {
-    display: block;
-    padding: 15px 20px;
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center; /* Ajusta el texto centrado */
-    border-radius: 10px;
-    margin: 5px 0;
-    transition: all 0.3s ease-in-out;
-    background: linear-gradient(135deg, #003f8a, #005bb5);
-}
-
-.menu-link:hover {
-    background: linear-gradient(90deg, #ffcc00, #f59e00);
-    color: #003f8a;
-    transform: scale(1.05);
-}
-
-/* Estilo del menú para pantallas pequeñas */
+/* Ajustes para pantallas pequeñas (pantallas entre 480px y 768px) */
 @media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
     .sidebar {
         width: 100%;
-        height: auto;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        padding: 10px 0;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1000;
-        background: linear-gradient(135deg, #003f8a, #005bb5);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: none;
+        padding: 10px;
     }
-
-    .menu {
-        display: flex; /* Cambiar a diseño horizontal */
-        flex-direction: row; /* Alineación en fila */
-        gap: 10px; /* Espacio entre los botones */
-    }
-
     .menu-link {
-        padding: 10px 15px;
         font-size: 14px;
-        border-radius: 5px;
-        white-space: nowrap; /* Evita que el texto se corte */
-        background: linear-gradient(135deg, #003f8a, #005bb5);
+        text-align: center;
+        padding: 10px;
     }
-
-    .menu-link:hover {
-        background: linear-gradient(90deg, #ffcc00, #f59e00);
-        transform: scale(1.05);
+    .content {
+        padding: 20px;
+    }
+    .title {
+        font-size: 26px;
+    }
+    .subtitle {
+        font-size: 14px;
+    }
+    table th, table td {
+        font-size: 14px;
+        padding: 10px;
+    }
+    .btn-action {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+    .btn-logout {
+        width: 100%;
+        padding: 10px;
     }
 }
 
+/* Ajustes para pantallas extra pequeñas (pantallas menores a 480px) */
+@media (max-width: 480px) {
+    .sidebar {
+        padding: 5px;
+        width: 100%;
+    }
+    .logo h1 {
+        font-size: 18px;
+    }
+    .menu-link {
+        font-size: 12px;
+        padding: 8px;
+    }
+    .content {
+        padding: 10px;
+    }
+    .title {
+        font-size: 22px;
+    }
+    .subtitle {
+        font-size: 12px;
+    }
+    table {
+        font-size: 12px;
+    }
+    table th, table td {
+        padding: 8px;
+    }
+    .btn-action {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+    .btn-logout {
+        padding: 8px;
+    }
+    .filters input[type="text"],
+    .filters input[type="number"],
+    .filters input[type="date"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .filters button {
+        width: 100%;
+        padding: 8px;
+    }
+}
+
+/* Mejoras para pantallas en modo horizontal (móviles en modo paisaje) */
+@media (orientation: landscape) and (max-height: 500px) {
+    .sidebar {
+        width: 180px;
+    }
+    .menu-link {
+        font-size: 12px;
+        padding: 6px;
+    }
+    .content {
+        padding: 10px;
+    }
+    .title {
+        font-size: 20px;
+    }
+}
