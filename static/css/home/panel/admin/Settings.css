@@ -39,8 +39,8 @@ body {
 /* Botón de Volver */
 .btn-back {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 5px;
+    left: 40%;
     background: linear-gradient(90deg, #ffcc00, #f59e00);
     color: #003f8a;
     font-size: 14px;
@@ -214,4 +214,33 @@ label {
         padding: 8px 15px;
         font-size: 12px;
     }
+}
+/* Botón de Volver (centrado y estático) */
+.btn-back {
+    display: block;
+    margin: 0 auto; /* Centramos el botón horizontalmente */
+    background: linear-gradient(90deg, #ffcc00, #f59e00);
+    color: #003f8a;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px; /* Espaciado inferior para separar del título */
+    text-align: center;
+}
+
+.btn-back:hover {
+    background: linear-gradient(90deg, #f59e00, #ff9800);
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Ajustes para que no se superponga con el contenido */
+.main-container {
+    margin-top: 40px; /* Asegurar que haya espacio entre el botón y el título */
 }
