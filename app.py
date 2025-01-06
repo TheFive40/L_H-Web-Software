@@ -2,6 +2,7 @@ import os
 from functools import wraps
 
 from flask import Flask, render_template, flash, redirect, url_for, session
+from flask_cors import CORS
 
 from controllers.api.Reports import reports_bp
 from controllers.auth.Auth import auth
@@ -21,6 +22,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
+CORS(app)
 
 with app.app_context():
     db.create_all()
@@ -53,5 +55,4 @@ def unauthorized():
 
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=7087, debug=True)
