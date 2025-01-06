@@ -367,6 +367,7 @@ input:focus, select:focus {
 
     .search-bar, .filter-dropdown {
         width: 48%;
+
     }
 
     table th, table td {
@@ -399,10 +400,13 @@ input:focus, select:focus {
         gap: 10px;
     }
 
-    .search-bar, .filter-dropdown {
+    .search-bar {
         width: 100%;
     }
-
+    .filter-dropdown {
+        width: 100%;
+        margin-right:25px;
+    }
     table {
         font-size: 12px;
     }
@@ -498,6 +502,7 @@ input:focus, select:focus {
     .search-bar,
     .filter-dropdown {
         width: 100%;
+        margin-left:25px;
     }
 
     table {
@@ -571,20 +576,4 @@ input:focus, select:focus {
     background: linear-gradient(90deg, #f59e00, #ff9800);
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-.filter-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.search-bar {
-    flex: 1;
-    margin-right: 10px;
-}
-
-.filter-dropdown {
-    flex: 0 0 200px;
 }
