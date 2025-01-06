@@ -452,9 +452,9 @@ table td:last-child {
         height: auto;
         background: linear-gradient(135deg, #003f8a, #005bb5);
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
-        padding: 10px 20px;
+        padding: 10px 0;
         position: fixed;
         top: 0;
         left: 0;
