@@ -465,3 +465,24 @@ table {
         padding: 8px;
     }
 }
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column; /* Cambiar a columnas en pantallas pequeñas */
+        align-items: stretch; /* Asegurar que los elementos ocupen todo el ancho */
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .buttons-container {
+        justify-content: center; /* Centrar los botones en pantallas pequeñas */
+        margin-left: 0; /* Quitar la alineación a la derecha */
+    }
+
+    .btn-filter,
+    .btn-export {
+        width: 100%; /* Los botones ocupan todo el ancho */
+        text-align: center;
+    }
+}
