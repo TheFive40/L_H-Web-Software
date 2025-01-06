@@ -6,10 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const logoutButton = document.querySelector(".btn-logout");
     const currentUserApiUrl = "/api/user/current-user";
     const recordsTable = document.getElementById("records-table");
-    const recordsPerPage = 7; // Registros por página
-    let currentPage = 1; // Página actual
-    let totalRecords = 0; // Total de registros
-    let records = []; // Almacena todos los registros
+    const recordsPerPage = 7;
+    let currentPage = 1;
+    let totalRecords = 0;
+    let records = [];
     const paginationContainer = document.getElementById("pagination");
     const apiEndpoints = {
         getAllRecords: "/api/work-records/all",
@@ -18,12 +18,11 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     function decimalToTime(decimalHours) {
-        const hours = Math.floor(decimalHours); // Parte entera (horas)
-        const minutes = Math.round((decimalHours - hours) * 60); // Parte decimal convertida a minutos
-        return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`; // Formato hh:mm
+        const hours = Math.floor(decimalHours);
+        const minutes = Math.round((decimalHours - hours) * 60);
+        return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
     }
 
-    // Cargar datos del usuario actual desde el backend
     async function loadCurrentUser() {
         try {
             const response = await fetch(currentUserApiUrl);
@@ -32,32 +31,28 @@ document.addEventListener("DOMContentLoaded", () => {
             if (userData.status === "success") {
                 const currentUser = userData.data;
 
-                // Mostrar el nombre del usuario
                 userNameElement.textContent = currentUser.nombre_completo || "Usuario Desconocido";
 
-                // Mostrar el rol del usuario
                 userRoleElement.textContent = currentUser.cargo || "Rol no asignado";
 
-                // Mostrar la foto de perfil
                 if (currentUser.foto_perfil) {
                     profilePicture.src = `data:image/png;base64,${currentUser.foto_perfil}`;
                 } else {
                     profilePicture.src = "/static/images/default-profile.png"; // Imagen por defecto
                 }
 
-                // Almacenar el ID del usuario en el elemento de la foto
                 profilePicture.dataset.userId = currentUser.id;
             } else {
                 console.error("Error al obtener usuario actual:", userData.message);
                 userNameElement.textContent = "Usuario Desconocido";
                 userRoleElement.textContent = "Rol no asignado";
-                profilePicture.src = "/static/images/default-profile.png"; // Imagen por defecto
+                profilePicture.src = "/static/images/default-profile.png";
             }
         } catch (error) {
             console.error("Error al cargar el usuario actual:", error);
             userNameElement.textContent = "Usuario Desconocido";
             userRoleElement.textContent = "Rol no asignado";
-            profilePicture.src = "/static/images/default-profile.png"; // Imagen por defecto
+            profilePicture.src = "/static/images/default-profile.png";
         }
     }
 
@@ -98,13 +93,12 @@ document.addEventListener("DOMContentLoaded", () => {
     function convertImageToBase64(file) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
-            reader.onload = () => resolve(reader.result.split(",")[1]); // Base64 sin el encabezado
+            reader.onload = () => resolve(reader.result.split(",")[1]);
             reader.onerror = (error) => reject(error);
             reader.readAsDataURL(file);
         });
     }
 
-    // Evento para cambiar la foto de perfil al hacer doble clic
     if (profilePicture) {
         profilePicture.addEventListener("dblclick", async () => {
             const fileInput = document.createElement("input");
@@ -151,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     title: "Sesión cerrada",
                                     text: "Tu sesión se cerró correctamente.",
                                 }).then(() => {
-                                    window.location.href = "/"; // Redirigir al inicio o página de login
+                                    window.location.href = "/";
                                 });
                             } else {
                                 Swal.fire({
@@ -175,10 +169,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function renderPagination() {
-        const totalPages = Math.ceil(filteredRecords.length / recordsPerPage); // Usar registros filtrados
-        paginationContainer.innerHTML = ""; // Limpiar paginador
+        const totalPages = Math.ceil(filteredRecords.length / recordsPerPage);
+        paginationContainer.innerHTML = "";
 
-        const maxVisibleButtons = 5; // Máximo de botones visibles
+        const maxVisibleButtons = 5;
         const halfRange = Math.floor(maxVisibleButtons / 2);
 
         let startPage = Math.max(currentPage - halfRange, 1);
@@ -188,18 +182,16 @@ document.addEventListener("DOMContentLoaded", () => {
             startPage = Math.max(endPage - maxVisibleButtons + 1, 1);
         }
 
-        // Botón "Anterior"
         const prevButton = document.createElement("button");
         prevButton.textContent = "Anterior";
         prevButton.disabled = currentPage === 1;
         prevButton.addEventListener("click", () => {
             currentPage--;
             renderPagination();
-            renderPage(currentPage, filteredRecords); // Pasar registros filtrados
+            renderPage(currentPage, filteredRecords);
         });
         paginationContainer.appendChild(prevButton);
 
-        // Botones de números
         for (let i = startPage; i <= endPage; i++) {
             const pageButton = document.createElement("button");
             pageButton.textContent = i;
@@ -207,19 +199,18 @@ document.addEventListener("DOMContentLoaded", () => {
             pageButton.addEventListener("click", () => {
                 currentPage = i;
                 renderPagination();
-                renderPage(currentPage, filteredRecords); // Pasar registros filtrados
+                renderPage(currentPage, filteredRecords);
             });
             paginationContainer.appendChild(pageButton);
         }
 
-        // Botón "Siguiente"
         const nextButton = document.createElement("button");
         nextButton.textContent = "Siguiente";
         nextButton.disabled = currentPage === totalPages;
         nextButton.addEventListener("click", () => {
             currentPage++;
             renderPagination();
-            renderPage(currentPage, filteredRecords); // Pasar registros filtrados
+            renderPage(currentPage, filteredRecords);
         });
         paginationContainer.appendChild(nextButton);
     }
@@ -237,10 +228,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function filterByExtraHours(records, extraHoursFilter) {
-        if (isNaN(extraHoursFilter) || extraHoursFilter <= 0) return records; // Si no hay filtro válido, devolver todos los registros
+        if (isNaN(extraHoursFilter) || extraHoursFilter <= 0) return records;
 
         return records.filter(record => {
-            const extraHours = record.extra_hours || 0; // Asegurar que extra_hours tenga un valor numérico
+            const extraHours = record.extra_hours || 0;
             return extraHours === extraHoursFilter;
         });
     }
@@ -251,20 +242,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const extraHoursFilter = parseFloat(document.getElementById("filter-hours").value || 0);
         const dateFilter = document.getElementById("filter-date").value;
 
-        let filtered = records; // Iniciar con todos los registros
+        let filtered = records;
 
-        // Aplicar filtros
-        filtered = filterByName(filtered, nameFilter); // Filtrar por nombre
-        filtered = filterByDate(filtered, dateFilter); // Filtrar por fecha
-        filtered = filterByExtraHours(filtered, extraHoursFilter); // Filtrar por horas extras
+        filtered = filterByName(filtered, nameFilter);
+        filtered = filterByDate(filtered, dateFilter);
+        filtered = filterByExtraHours(filtered, extraHoursFilter);
 
-        // Actualizar registros filtrados y reiniciar paginación
         filteredRecords = filtered;
         if (filteredRecords.length === 0) {
             recordsTable.innerHTML = `<tr><td colspan="8" style="text-align: center; color: red;">No se encontraron registros con los filtros aplicados.</td></tr>`;
-            paginationContainer.innerHTML = ""; // Limpiar paginación
+            paginationContainer.innerHTML = "";
         } else {
-            currentPage = 1; // Reiniciar a la primera página
+            currentPage = 1;
             renderPagination();
             renderPage(currentPage, filteredRecords);
         }
@@ -290,8 +279,8 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("filter-hours").value = "";
         document.getElementById("filter-date").value = "";
 
-        filteredRecords = [...records]; // Restaurar todos los registros
-        currentPage = 1; // Reiniciar a la primera página
+        filteredRecords = [...records];
+        currentPage = 1;
         renderPagination();
         renderPage(currentPage, filteredRecords);
     }
@@ -303,8 +292,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = await response.json();
 
             if (data.status === "success") {
-                records = data.data.sort((a, b) => new Date(b.date) - new Date(a.date)); // Ordenar por fecha descendente
-                filteredRecords = [...records]; // Inicialmente, los registros filtrados son todos los registros
+                records = data.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+                filteredRecords = [...records];
                 renderPagination();
                 renderPage(currentPage, filteredRecords);
             } else {
@@ -320,7 +309,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateExtraHoursInTable(row, extraHours) {
         const extraHoursCell = row.querySelector('[data-field="extra_hours"]');
         if (extraHoursCell) {
-            extraHoursCell.textContent = decimalToTime(extraHours); // Mostrar como hh:mm
+            extraHoursCell.textContent = decimalToTime(extraHours);
         }
     }
 
@@ -329,7 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const workedDecimal = workedHours + workedMinutes / 60;
 
         const extraHours = Math.max(0, workedDecimal - standardHours);
-        return decimalToTime(extraHours); // Convertir a formato hh:mm
+        return decimalToTime(extraHours);
     }
     function calculateTotalHours(checkIn, checkOut) {
         if (!checkIn || !checkOut) return "00:00";
@@ -337,7 +326,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const [checkInHours, checkInMinutes] = checkIn.split(":").map(Number);
         const [checkOutHours, checkOutMinutes] = checkOut.split(":").map(Number);
 
-        // Convertir horas y minutos a minutos totales
         const checkInTotalMinutes = checkInHours * 60 + checkInMinutes;
         const checkOutTotalMinutes = checkOutHours * 60 + checkOutMinutes;
 
@@ -370,7 +358,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     updatedData[field] = value;
                 });
 
-                // Recalcular horas totales y extras
                 const totalHoursCell = row.querySelector("td[data-field='total_hours']");
                 const extraHoursCell = row.querySelector("td[data-field='extra_hours']");
 
@@ -378,15 +365,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     const totalHours = calculateTotalHours(checkIn, checkOut);
                     const extraHours = calculateExtraHours(totalHours);
 
-                    totalHoursCell.textContent = totalHours; // Actualizar horas totales
-                    extraHoursCell.textContent = extraHours; // Actualizar horas extras
-                    updatedData.total_hours = timeToDecimal(totalHours); // Guardar en formato decimal
-                    updatedData.extra_hours = timeToDecimal(extraHours); // Guardar horas extras en decimal
+                    totalHoursCell.textContent = totalHours;
+                    extraHoursCell.textContent = extraHours;
+                    updatedData.total_hours = timeToDecimal(totalHours);
+                    updatedData.extra_hours = timeToDecimal(extraHours);
                 }
 
                 console.log("Datos enviados al servidor:", updatedData);
 
-                // Llamar a la API para actualizar
                 try {
                     const response = await fetch(`/api/work-records/update/${recordId}`, {
                         method: "PUT",
@@ -417,7 +403,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     async function deleteRecord(recordId) {
-        // Mostrar mensaje de confirmación
         const confirmation = await Swal.fire({
             title: "¿Estás seguro?",
             text: "Esta acción no se puede deshacer.",
@@ -427,7 +412,6 @@ document.addEventListener("DOMContentLoaded", () => {
             cancelButtonText: "Cancelar",
         });
 
-        // Si el usuario confirma, proceder con la eliminación
         if (confirmation.isConfirmed) {
             try {
                 const response = await fetch(`${apiEndpoints.deleteRecord}/${recordId}`, {
@@ -437,7 +421,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const result = await response.json();
                 if (result.status === "success") {
                     Swal.fire("Eliminado", "El registro se eliminó con éxito.", "success");
-                    loadRecords(); // Recargar la tabla
+                    loadRecords();
                 } else {
                     Swal.fire("Error", result.message, "error");
                 }
@@ -446,7 +430,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 Swal.fire("Error", "No se pudo eliminar el registro.", "error");
             }
         } else {
-            // Opción cancelar
             Swal.fire("Cancelado", "El registro no fue eliminado.", "info");
         }
     }
@@ -462,7 +445,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const result = await response.json();
             if (result.status === "success") {
                 Swal.fire("Actualizado", "El registro se actualizó con éxito.", "success");
-                loadRecords(); // Recargar registros
+                loadRecords();
             } else {
                 Swal.fire("Error", result.message || "Error al actualizar el registro.", "error");
             }
@@ -479,10 +462,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     function renderPage(page, data) {
-        recordsTable.innerHTML = ""; // Limpiar la tabla
+        recordsTable.innerHTML = "";
         const startIndex = (page - 1) * recordsPerPage;
         const endIndex = startIndex + recordsPerPage;
-        const pageRecords = data.slice(startIndex, endIndex); // Mostrar solo registros de la página actual
+        const pageRecords = data.slice(startIndex, endIndex);
 
         if (pageRecords.length === 0) {
             recordsTable.innerHTML = `<tr><td colspan="8" style="text-align: center; color: red;">No hay registros para mostrar.</td></tr>`;
@@ -490,8 +473,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         pageRecords.forEach(record => {
-            const totalHours = calculateTotalHours(record.check_in, record.check_out); // Calcular horas totales
-            const extraHours = calculateExtraHours(totalHours); // Calcular horas extras
+            const totalHours = calculateTotalHours(record.check_in, record.check_out);
+            const extraHours = calculateExtraHours(totalHours);
 
             const row = document.createElement("tr");
             row.innerHTML = `
@@ -500,8 +483,8 @@ document.addEventListener("DOMContentLoaded", () => {
             <td data-field="date">${record.date}</td>
             <td data-field="check_in" contenteditable="true">${record.check_in}</td>
             <td data-field="check_out" contenteditable="true">${record.check_out || "No registrado"}</td>
-            <td data-field="total_hours">${totalHours}</td> <!-- Mostrar horas totales calculadas -->
-            <td data-field="extra_hours">${extraHours}</td> <!-- Mostrar horas extras calculadas -->
+            <td data-field="total_hours">${totalHours}</td> 
+            <td data-field="extra_hours">${extraHours}</td> 
             <td>
                 <button class="btn-update" data-id="${record.id}">Actualizar</button>
                 <button class="btn-delete" data-id="${record.id}">Eliminar</button>
@@ -510,8 +493,8 @@ document.addEventListener("DOMContentLoaded", () => {
             recordsTable.appendChild(row);
         });
 
-        makeCellsEditable(); // Hacer celdas editables
-        addEventListenersToButtons(); // Añadir eventos a los botones
+        makeCellsEditable();
+        addEventListenersToButtons();
     }
 
 
