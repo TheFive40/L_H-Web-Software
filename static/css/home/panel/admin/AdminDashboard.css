@@ -456,8 +456,9 @@ table td:last-child {
         justify-content: space-around;
         padding: 10px 0;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        position: sticky;
+        position: fixed;
         top: 0;
+        left: 0;
         z-index: 1000;
     }
 
@@ -465,13 +466,20 @@ table td:last-child {
         display: flex;
         gap: 15px;
         align-items: center;
+        flex-wrap: nowrap;
     }
 
     .menu-link {
-        padding: 10px 20px;
+        padding: 10px 15px;
         font-size: 14px;
         font-weight: bold;
         border-radius: 8px;
+        text-align: center;
+    }
+
+    .content {
+        margin-top: 60px;
+        padding: 15px;
     }
 
     .filters {
@@ -490,12 +498,12 @@ table td:last-child {
     .filters input[type="number"],
     .filters input[type="date"] {
         padding: 10px;
-        width: 100%;
+        width: calc(100% - 20px);
         font-size: 14px;
     }
 
     .filters button {
-        width: 100%;
+        width: calc(100% - 20px);
         padding: 10px 15px;
         font-size: 14px;
     }
@@ -519,11 +527,6 @@ table td:last-child {
     .menu-link {
         font-size: 12px;
         padding: 8px 10px;
-    }
-
-    .btn-action {
-        font-size: 14px;
-        padding: 10px 15px;
     }
 
     .filters input[type="text"],
