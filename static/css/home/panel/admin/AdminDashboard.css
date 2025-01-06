@@ -573,3 +573,119 @@ table td:last-child {
         font-size: 20px;
     }
 }
+/* Diseño general en pantallas pequeñas (máximo 768px) */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column; /* Cambiar el diseño a una columna */
+    }
+
+    .sidebar {
+        width: 100%; /* Sidebar ocupa toda la pantalla */
+        box-shadow: none; /* Quitar sombra en pantallas pequeñas */
+    }
+
+    .content {
+        padding: 10px;
+    }
+
+    .filters {
+        flex-wrap: wrap; /* Los filtros se alinean en varias filas */
+        gap: 5px; /* Menor espacio entre filtros */
+    }
+
+    .filters input,
+    .filters button {
+        width: 100%; /* Inputs y botones ocupan todo el ancho */
+    }
+
+    .table-container {
+        overflow-x: auto; /* Agregar scroll horizontal a la tabla si es necesario */
+    }
+
+    table th,
+    table td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .btn-action {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
+
+/* Pantallas muy pequeñas (máximo 480px) */
+@media (max-width: 480px) {
+    .title {
+        font-size: 20px;
+    }
+
+    .subtitle {
+        font-size: 12px;
+    }
+
+    .filters {
+        flex-direction: column; /* Filtros en una sola columna */
+    }
+
+    table th,
+    table td {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .btn-action {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .btn-logout {
+        padding: 10px; /* Reducir padding */
+        font-size: 14px;
+    }
+
+    .sidebar .menu-link {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
+
+/* Pantallas entre 1024px y 768px */
+@media (max-width: 1024px) and (min-width: 768px) {
+    .sidebar {
+        width: 200px; /* Reducir ancho de sidebar */
+    }
+
+    .content {
+        padding: 20px; /* Menor padding para contenido */
+    }
+
+    .filters input {
+        font-size: 14px;
+    }
+
+    table th,
+    table td {
+        font-size: 14px;
+    }
+}
+
+/* Ajustes para orientación horizontal */
+@media (orientation: landscape) and (max-height: 500px) {
+    .sidebar {
+        width: 150px; /* Sidebar más pequeño */
+    }
+
+    .filters {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .filters input {
+        width: 45%; /* Dos inputs por fila */
+    }
+
+    .filters button {
+        width: 45%; /* Botones en la misma fila */
+    }
+}
