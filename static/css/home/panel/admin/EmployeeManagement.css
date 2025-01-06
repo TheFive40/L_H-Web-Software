@@ -487,3 +487,82 @@ input:focus, select:focus {
         padding: 8px;
     }
 }
+/* Ajustes para pantallas pequeñas entre 768px y 480px */
+@media (max-width: 768px) {
+    /* Botón "Volver al Menú" */
+    .btn-back {
+        font-size: 12px;
+        padding: 8px 12px;
+        width: auto; /* Ajusta automáticamente al texto */
+    }
+
+    /* Inputs y filtros */
+    .filter-container {
+        flex-direction: column; /* Filtros en columnas */
+        gap: 10px; /* Espacio entre filtros */
+    }
+
+    .search-bar,
+    .filter-dropdown {
+        width: 100%; /* Ocupa todo el ancho disponible */
+    }
+
+    /* Tabla de empleados */
+    table {
+        font-size: 12px; /* Texto más pequeño en tablas */
+        overflow-x: auto; /* Habilitar scroll horizontal si es necesario */
+    }
+
+    table th, table td {
+        padding: 10px;
+    }
+
+    /* Botones de acciones */
+    .btn-edit, .btn-delete {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+/* Ajustes para pantallas muy pequeñas, menores a 480px */
+@media (max-width: 480px) {
+    /* Encabezados y botones */
+    .title {
+        font-size: 20px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    .btn-add {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    /* Ajustes para filtros */
+    .filter-container {
+        gap: 5px;
+    }
+
+    /* Tabla compacta */
+    table th, table td {
+        font-size: 10px;
+        padding: 6px;
+    }
+
+    .btn-edit, .btn-delete {
+        font-size: 10px;
+        padding: 5px 8px;
+    }
+
+    .pagination-button {
+        font-size: 10px;
+        padding: 5px 8px;
+    }
+
+    /* Scroll horizontal para tabla */
+    .main-container {
+        overflow-x: auto; /* Permitir desplazamiento horizontal */
+    }
+}
