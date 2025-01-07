@@ -1,14 +1,73 @@
 const reportsApiUrl = '/api/report'; // URL base para reportes
 const usersApiUrl = '/api/user/usuarios'; // URL base para obtener empleados
 const currentUserApiUrl = '/api/user/current-user'; // Endpoint para el usuario actual
-
+let currentPage = 1;
+const rowsPerPage = 5;
+let reportsData = [];
 document.addEventListener('DOMContentLoaded', () => {
     loadEmployeesIntoSelect(); // Cargar empleados al iniciar la página
     document.getElementById('filter-form').addEventListener('submit', generateReport);
     document.getElementById('export-btn').addEventListener('click', exportToExcel);
     loadCurrentUser()
 });
+function renderTable() {
+    const tableBody = document.getElementById('reports-table');
+    tableBody.innerHTML = '';
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const endIndex = Math.min(startIndex + rowsPerPage, reportsData.length);
 
+    if (reportsData.length === 0) {
+        const noDataRow = document.createElement('tr');
+        noDataRow.innerHTML = `<td colspan="6" style="text-align:center;">No se encontraron resultados</td>`;
+        tableBody.appendChild(noDataRow);
+        return;
+    }
+
+    for (let i = startIndex; i < endIndex; i++) {
+        const report = reportsData[i];
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${report.empleado}</td>
+            <td>${report.fecha}</td>
+            <td>${report.hora_entrada}</td>
+            <td>${report.hora_salida}</td>
+            <td>${report.horas_totales}</td>
+            <td>${report.horas_extras}</td>
+        `;
+        tableBody.appendChild(row);
+    }
+}
+function updatePaginationControls() {
+    const paginationDiv = document.getElementById('pagination');
+    paginationDiv.innerHTML = '';
+
+    const totalPages = Math.ceil(reportsData.length / rowsPerPage);
+
+    const prevButton = document.createElement('button');
+    prevButton.textContent = 'Anterior';
+    prevButton.disabled = currentPage === 1;
+    prevButton.addEventListener('click', () => {
+        currentPage--;
+        renderTable();
+        updatePaginationControls();
+    });
+
+    const nextButton = document.createElement('button');
+    nextButton.textContent = 'Siguiente';
+    nextButton.disabled = currentPage === totalPages;
+    nextButton.addEventListener('click', () => {
+        currentPage++;
+        renderTable();
+        updatePaginationControls();
+    });
+
+    const pageInfo = document.createElement('span');
+    pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
+
+    paginationDiv.appendChild(prevButton);
+    paginationDiv.appendChild(pageInfo);
+    paginationDiv.appendChild(nextButton);
+}
 // Cargar empleados dinámicamente en el combo
 function loadEmployeesIntoSelect() {
     fetch(usersApiUrl)
@@ -77,28 +136,9 @@ function generateReport(event) {
 }
 
 function displayReportResults(reports) {
-    const tableBody = document.getElementById('reports-table');
-    tableBody.innerHTML = ''; // Limpiar contenido previo
-
-    if (reports.length === 0) {
-        const noDataRow = document.createElement('tr');
-        noDataRow.innerHTML = `<td colspan="6" style="text-align:center;">No se encontraron resultados</td>`;
-        tableBody.appendChild(noDataRow);
-        return;
-    }
-
-    reports.forEach(report => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${report.empleado}</td>
-            <td>${report.fecha}</td>
-            <td>${report.hora_entrada}</td>
-            <td>${report.hora_salida}</td>
-            <td>${report.horas_totales}</td>
-            <td>${report.horas_extras}</td>
-        `;
-        tableBody.appendChild(row);
-    });
+    reportsData = reports;
+    renderTable();
+    updatePaginationControls();
 }
 
 let currentUser = {}; // Objeto para almacenar los datos del usuario actual
