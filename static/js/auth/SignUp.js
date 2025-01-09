@@ -61,7 +61,7 @@ function handleRegister() {
                     timer: 2000,
                     showConfirmButton: false,
                 }).then(() => {
-                    window.location.href = "{{ url_for('auth.login') }}"; // Redirige al login
+                    window.location.href = "/"; // Redirige al login
                 });
             } else {
                 Swal.fire({

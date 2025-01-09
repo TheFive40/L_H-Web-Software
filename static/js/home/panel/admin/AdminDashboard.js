@@ -273,7 +273,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-
     function clearFilters() {
         document.getElementById("filter-name").value = "";
         document.getElementById("filter-hours").value = "";
@@ -320,6 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const extraHours = Math.max(0, workedDecimal - standardHours);
         return decimalToTime(extraHours);
     }
+
     function calculateTotalHours(checkIn, checkOut) {
         if (!checkIn || !checkOut) return "00:00";
 
@@ -376,13 +376,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 try {
                     const response = await fetch(`/api/work-records/update/${recordId}`, {
                         method: "PUT",
-                        headers: { "Content-Type": "application/json" },
+                        headers: {"Content-Type": "application/json"},
                         body: JSON.stringify(updatedData),
                     });
 
                     const result = await response.json();
                     if (result.status === "success") {
-                        Swal.fire("Actualizado", "El registro se actualizó correctamente.", "success");
+                        Swal.fire({
+                            title: "Actualizado",
+                            text: "El registro se actualizó correctamente.",
+                            icon: "success",
+                            confirmButtonText: "Aceptar"
+                        }).then(() => {
+                            window.location.reload();
+                        });
                     } else {
                         Swal.fire("Error", result.message || "Error al actualizar el registro.", "error");
                     }
@@ -399,7 +406,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-
 
 
     async function deleteRecord(recordId) {
@@ -438,7 +444,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const response = await fetch(`${apiEndpoints.updateRecord}/${recordId}`, {
                 method: "PUT",
-                headers: { "Content-Type": "application/json" },
+                headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(updatedData),
             });
 

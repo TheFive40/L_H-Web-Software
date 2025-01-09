@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.getElementById("loginForm");
-
-    // Manejar el evento de envío del formulario
     loginForm.addEventListener("submit", async (e) => {
-        e.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+        e.preventDefault();
 
         const email = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value.trim();

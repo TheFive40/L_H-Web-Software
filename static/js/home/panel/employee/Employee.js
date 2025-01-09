@@ -10,15 +10,16 @@ document.addEventListener("DOMContentLoaded", () => {
     let records = [];
 
     // Registrar entrada de trabajo
-    startWorkButton.addEventListener('click', () => {
+    startWorkButton.addEventListener('click', async () => {
         const today = new Date().toISOString().split('T')[0];
         const currentTime = new Date().toTimeString().split(' ')[0];
+        const userId = await getUserInfo();
 
         fetch('/api/work-records/add', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                usuario_id: 3,
+                usuario_id: userId,
                 fecha: today,
                 hora_entrada: currentTime
             })
@@ -34,11 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     });
 
-    // Registrar salida de trabajo
-    endWorkButton.addEventListener('click', () => {
-        fetch('/api/work-records/work/end/3', {
+    endWorkButton.addEventListener('click', async () => {
+        const userId = await getUserInfo();
+
+        fetch(`/api/work-records/work/end/${userId}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' }
+            headers: {'Content-Type': 'application/json'}
         })
             .then(response => response.json())
             .then(data => {

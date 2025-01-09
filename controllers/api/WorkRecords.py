@@ -19,7 +19,7 @@ def get_all_records():
                 "date": record.fecha.strftime('%Y-%m-%d'),
                 "check_in": record.hora_entrada.strftime('%H:%M:%S'),
                 "check_out": record.hora_salida.strftime('%H:%M:%S') if record.hora_salida else None,
-                "extra_hours": float(record.horas_extras)
+                "extra_hours": float(record.horas_extras) if record.horas_extras is not None else 0.0
             } for record in records
         ]
         return jsonify({"status": "success", "data": result}), 200
@@ -68,31 +68,35 @@ def add_work_record():
 def update_record(record_id):
     try:
         data = request.json
-        print(f"Datos recibidos para actualizar: {data}")  # Log para verificar los datos
 
-        # Busca el registro en la base de datos
+        # Buscar el registro en la base de datos
         record = db.session.query(WorkRecord).filter_by(id=record_id).first()
         if not record:
-            return jsonify({"status": "error", "message": "Record not found"}), 404
+            return jsonify({"status": "error", "message": "Registro no encontrado"}), 404
 
-        # Log para verificar el registro encontrado
-        print(f"Registro antes de la actualización: {record.__dict__}")
+        # Validar y asignar fecha
+        if 'date' in data:
+            record.fecha = data['date']
 
-        # Actualizar solo los campos proporcionados
+        # Validar y asignar hora_entrada
         record.hora_entrada = data.get('check_in', record.hora_entrada)
-        record.hora_salida = data.get('check_out', record.hora_salida)
+
+        # Validar y asignar hora_salida (usar None si es "No registrado")
+        hora_salida = data.get('check_out')
+        if hora_salida == "No registrado" or not hora_salida:
+            record.hora_salida = None
+        else:
+            record.hora_salida = hora_salida
+
+        # Validar y asignar horas_extras
         record.horas_extras = data.get('extra_hours', record.horas_extras)
 
         # Confirmar cambios
         db.session.commit()
+        return jsonify({"status": "success", "message": "Registro actualizado correctamente"}), 200
 
-        # Log para confirmar los cambios
-        print(f"Registro actualizado: {record.__dict__}")
-
-        return jsonify({"status": "success", "message": "Work record updated successfully"}), 200
     except SQLAlchemyError as e:
-        db.session.rollback()  # Revertir cambios en caso de error
-        print(f"Error al actualizar: {str(e)}")
+        db.session.rollback()
         return jsonify({"status": "error", "message": str(e)}), 500
 
 

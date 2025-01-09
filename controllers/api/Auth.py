@@ -15,8 +15,14 @@ def register():
         if not data or not all(key in data for key in ('full_name', 'email', 'password')):
             return jsonify({"status": "error", "message": "Invalid data"}), 400
 
+        # Verificar si ya existe un usuario con el mismo correo
+        existing_user = db.session.query(User).filter_by(correo=data['email']).first()
+        if existing_user:
+            return jsonify({"status": "error", "message": "El correo ya está registrado"}), 409  # Código 409: Conflict
+
         role_id = 1
 
+        # Crear el nuevo usuario
         new_user = User(
             nombre_completo=data['full_name'],
             correo=data['email'],
@@ -34,19 +40,14 @@ def register():
 @authAPI.route('/login', methods=['POST'])
 def login():
     try:
-        # Obtener los datos del JSON
         data = request.get_json()
 
-        # Validar los datos de entrada
         if not data or not all(key in data for key in ('email', 'password')):
             return jsonify({"status": "error", "message": "Email and password are required"}), 400
 
-        # Consultar el usuario en la base de datos
         user = db.session.query(User).filter_by(correo=data['email']).first()
 
-        # Verificar si el usuario existe y las credenciales son correctas
         if user and check_password_hash(user.contrasena, data['password']):
-            # Establecer datos de sesión
             session['user_id'] = user.id
             session['full_name'] = user.nombre_completo
             role_map = {2: 'Admin', 1: 'Empleado', 3: 'Supervisor'}
