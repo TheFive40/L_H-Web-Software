@@ -27,22 +27,17 @@ class Role(Base):
 # Tabla de Usuarios
 class User(Base):
     __tablename__ = 'usuarios'
-
     id = Column(Integer, primary_key=True, autoincrement=True)
     nombre_completo = Column(String(100), nullable=False)
     correo = Column(String(100), nullable=False, unique=True)
     contrasena = Column(String(255), nullable=False)
-    foto_perfil = Column(Text, nullable=True)  # Ruta o URL de la foto
+    foto_perfil = Column(Text, nullable=True)
     rol_id = Column(Integer, ForeignKey('roles.id'), nullable=False)
     creado_en = Column(TIMESTAMP, server_default=func.current_timestamp())
     actualizado_en = Column(TIMESTAMP, server_default=func.current_timestamp(), onupdate=func.current_timestamp())
-
-    # Relación con la tabla roles
     rol = relationship("Role", back_populates="usuarios")
-
-    # Relación con la tabla registros_trabajo
     registros = relationship("WorkRecord", back_populates="usuario")
-
+    estado = Column(String(25))
     def __repr__(self):
         return f"<User(id={self.id}, nombre_completo='{self.nombre_completo}')>"
 

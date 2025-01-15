@@ -7,6 +7,30 @@ from model.db import db
 user_bp = Blueprint('user_bp', __name__)
 
 
+@user_bp.route('/usuarios/reset_password', methods=['PUT'])
+def reset_user_password():
+    try:
+        data = request.json
+        nueva_contrasena = data.get('nueva_contrasena')
+
+        if not nueva_contrasena:
+            return jsonify({'status': 'error', 'message': 'Se requiere una nueva contraseña'}), 400
+
+        usuario = db.session.query(User).filter_by(correo=data.get('correo')).first()
+        if not usuario:
+            return jsonify({'status': 'error', 'message': 'Usuario no encontrado'}), 404
+
+        usuario.contrasena = generate_password_hash(nueva_contrasena)
+        db.session.commit()
+
+        return jsonify({'status': 'success', 'message': 'Contraseña actualizada exitosamente'}), 200
+
+    except SQLAlchemyError as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 400
+
+
 @user_bp.route('/usuarios', methods=['POST'])
 def create_user():
     try:
@@ -19,7 +43,8 @@ def create_user():
             correo=data['correo'],
             contrasena=generate_password_hash(data['contrasena']),
             foto_perfil=data.get('foto_perfil'),
-            rol_id=data['rol_id']
+            rol_id=data['rol_id'],
+            estado='ACTIVO'
         )
         db.session.add(new_user)
         db.session.commit()
@@ -46,6 +71,7 @@ def get_user_by_id(id):
     }
     return jsonify({'status': 'success', 'data': result}), 200
 
+
 @user_bp.route('/usuarios/<int:userId>', methods=['PUT'])
 def update_user(userId):
     data = request.json
@@ -59,6 +85,7 @@ def update_user(userId):
             usuario.contrasena = generate_password_hash(data['contrasena'])
         usuario.foto_perfil = data.get('foto_perfil', usuario.foto_perfil)
         usuario.rol_id = data.get('rol_id', usuario.rol_id)
+        usuario.estado = data.get('estado', "ACTIVO")
         db.session.commit()
         return jsonify({'message': 'Usuario actualizado exitosamente'}), 200
     except IntegrityError:
@@ -79,7 +106,7 @@ def delete_user(userId):
 @user_bp.route('/usuarios', methods=['GET'])
 def get_all_users():
     try:
-        usuarios = db.session.query(User).all()
+        usuarios = db.session.query(User).filter_by(estado='ACTIVO').all()
         if not usuarios:
             return jsonify({'status': 'error', 'message': 'No hay usuarios registrados'}), 404
 
@@ -91,7 +118,8 @@ def get_all_users():
                 'foto_perfil': usuario.foto_perfil,
                 'rol_id': usuario.rol_id,
                 'creado_en': usuario.creado_en,
-                'actualizado_en': usuario.actualizado_en
+                'actualizado_en': usuario.actualizado_en,
+                'estado': usuario.estado
             } for usuario in usuarios
         ]
         return jsonify({'status': 'success', 'data': result}), 200

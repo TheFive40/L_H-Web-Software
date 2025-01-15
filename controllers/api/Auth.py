@@ -3,11 +3,25 @@ from sqlalchemy.exc import SQLAlchemyError
 from werkzeug.security import check_password_hash, generate_password_hash
 from model.db import db
 from model.entities.Tables import User
+from itsdangerous import URLSafeTimedSerializer
 
 authAPI = Blueprint('authAPI', __name__)
 
 
-# Registro de usuario
+def generate_token(email, secret_key, salt='email-confirm'):
+    serializer = URLSafeTimedSerializer(secret_key)
+    return serializer.dumps(email, salt=salt)
+
+
+def confirm_token(token, secret_key, salt='email-confirm', expiration=3600):
+    serializer = URLSafeTimedSerializer(secret_key)
+    try:
+        email = serializer.loads(token, salt=salt, max_age=expiration)
+    except Exception:
+        return None
+    return email
+
+
 @authAPI.route('/register', methods=['POST'])
 def register():
     try:
@@ -15,7 +29,6 @@ def register():
         if not data or not all(key in data for key in ('full_name', 'email', 'password')):
             return jsonify({"status": "error", "message": "Invalid data"}), 400
 
-        # Verificar si ya existe un usuario con el mismo correo
         existing_user = db.session.query(User).filter_by(correo=data['email']).first()
         if existing_user:
             return jsonify({"status": "error", "message": "El correo ya está registrado"}), 409  # Código 409: Conflict
@@ -28,7 +41,8 @@ def register():
             correo=data['email'],
             contrasena=generate_password_hash(data['password']),
             rol_id=role_id,
-            foto_perfil=data.get('profile_picture', None)
+            foto_perfil=data.get('profile_picture', None),
+            estado='ACTIVO'
         )
         db.session.add(new_user)
         db.session.commit()

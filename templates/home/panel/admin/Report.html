@@ -11,16 +11,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home/panel/admin/Reports.css') }}">
 </head>
 <body>
-<!-- Contenedor Principal -->
 <div class="main-container">
-    <!-- Encabezado -->
     <div class="header">
         <h1 class="title">Reportes</h1>
         <p class="subtitle">Genera reportes detallados del desempeño de los empleados</p>
         <a class="btn-back" id="btn-back" href="{{ url_for('admin.adminDashboard') }}">Volver al Menú</a>
     </div>
-
-    <!-- Filtros -->
     <div class="filters">
         <h3>Filtros</h3>
         <form id="filter-form">
@@ -45,8 +41,6 @@
 
         </form>
     </div>
-
-    <!-- Tabla de Reportes -->
     <div class="reports-section">
         <h3>Resultados del Reporte</h3>
         <table>
@@ -61,7 +55,6 @@
             </tr>
             </thead>
             <tbody id="reports-table">
-            <!-- Filas dinámicas -->
             </tbody>
         </table>
         <div id="pagination" class="pagination"></div>

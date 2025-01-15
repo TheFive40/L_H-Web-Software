@@ -219,7 +219,20 @@ label {
 }
 
 
-/* Ajustes para que no se superponga con el contenido */
 .main-container {
-    margin-top: 40px; /* Asegurar que haya espacio entre el botón y el título */
+    margin-top: 40px;
+}
+body.light {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.dark {
+    background-color: #2c2c2c;
+    color: #ffffff;
+}
+
+/* Otros elementos */
+.navbar {
+    background-color: inherit;
 }

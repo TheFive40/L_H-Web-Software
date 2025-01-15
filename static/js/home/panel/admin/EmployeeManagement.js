@@ -5,6 +5,7 @@ let rolesCache = {};
 let employeesData = [];
 let currentPage = 1;
 const recordsPerPage = 10;
+let isActive = true
 document.addEventListener('DOMContentLoaded', () => {
     loadRolesAndEmployees();
     document.getElementById('search-input').addEventListener('input', filterEmployees);
@@ -44,6 +45,7 @@ function loadEmployees() {
         .then(data => {
             if (data.status === 'success' && Array.isArray(data.data)) {
                 employeesData = data.data;
+                employeesData.sort((a, b) => a.nombre_completo.localeCompare(b.nombre_completo));
                 displayPage(currentPage);
                 setupPagination();
             } else {
@@ -145,14 +147,15 @@ function setupPagination() {
 function updateEmployee(id, button) {
     const row = button.closest('tr');
     const updatedData = {};
-
     row.querySelectorAll('[contenteditable="true"]').forEach(cell => {
         updatedData[cell.getAttribute('data-field')] = cell.innerText.trim();
     });
-
     const roleName = updatedData.rol.trim().replace(/\n/g, '').toLowerCase();
     const roleId = Object.keys(rolesCache).find(id => rolesCache[id].trim().replace(/\n/g, '').toLowerCase() === roleName);
-
+    if (!isActive) {
+        updatedData.setAttribute("estado","INACTIVO")
+        isActive = true;
+    }
     if (!roleId) {
         Swal.fire({
             icon: 'error',
@@ -180,7 +183,7 @@ function updateEmployee(id, button) {
                     title: 'Empleado Actualizado',
                     text: 'El empleado ha sido actualizado exitosamente.',
                 });
-                loadEmployees(); // Recargar los empleados
+                loadEmployees();
             } else {
                 throw new Error(data.message || 'Error desconocido');
             }
@@ -227,12 +230,36 @@ function deleteEmployee(id) {
                     loadEmployees();
                 })
                 .catch(error => {
-                    console.error('Error al eliminar empleado:', error);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: `No se pudo eliminar el empleado: ${error.message}`,
-                    });
+                    isActive = false
+                    const updatedData = {'estado':'INACTIVO'}
+                    fetch(`${apiUrl}/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(updatedData),
+                    })
+                        .then(async (response) => {
+                            const data = await response.json();
+                            if (response.ok) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Empleado Eliminado',
+                                    text: 'El empleado ha sido eliminado exitosamente.',
+                                });
+                                loadEmployees();
+                            } else {
+                                throw new Error(data.message || 'Error desconocido');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error al eliminar el empleado:', error);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: `No se pudo actualizar el empleado: ${error.message}`,
+                            });
+                        });
                 });
         }
     });

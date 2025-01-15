@@ -29,8 +29,8 @@
         <div class="user-profile">
             <img class="profile-picture">
             <div class="profile-info">
-                <p class="user-name">Juan Pérez</p>
-                <p class="user-role">Administrador</p>
+                <p class="user-name"></p>
+                <p class="user-role"></p>
             </div>
         </div>
         <button class="btn-logout">Cerrar Sesión</button>
@@ -43,16 +43,11 @@
             <h1 class="title">Dashboard Administrador</h1>
             <p class="subtitle">Bienvenido al sistema de supervisión y control</p>
         </div>
-
-        <!-- Secciones -->
         <section id="bodega" class="section active">
             <h2>Bodega</h2>
             <p>Supervisa y controla el desempeño del equipo en la bodega.</p>
-            <!-- Tabla de Registros -->
             <div class="records-section">
                 <h3>Registros de Trabajo</h3>
-
-                <!-- Filtros de Búsqueda -->
                 <div class="filters">
                     <input type="text" id="filter-name" placeholder="Buscar por nombre">
                     <input type="number" id="filter-hours" placeholder="Horas mínimas">
@@ -60,8 +55,6 @@
                     <button id="apply-filters">Aplicar filtros</button>
                     <button id="clear-filters">Limpiar filtros</button>
                 </div>
-
-                <!-- Tabla de Registros -->
                 <table>
                     <thead>
                     <tr>
@@ -76,7 +69,6 @@
                     </tr>
                     </thead>
                     <tbody id="records-table">
-                    <!-- Filas dinámicas -->
                     </tbody>
                 </table>
                 <div id="pagination" class="pagination"></div>

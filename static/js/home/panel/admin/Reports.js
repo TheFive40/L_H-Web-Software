@@ -26,13 +26,15 @@ function renderTable() {
     for (let i = startIndex; i < endIndex; i++) {
         const report = reportsData[i];
         const row = document.createElement('tr');
+        let horas_totales  = calculateTotalHours(report.hora_entrada, report.hora_salida)
+        let extra_hours = calculateExtraHours(horas_totales)
         row.innerHTML = `
             <td>${report.empleado}</td>
             <td>${report.fecha}</td>
             <td>${report.hora_entrada}</td>
             <td>${report.hora_salida}</td>
-            <td>${report.horas_totales}</td>
-            <td>${report.horas_extras}</td>
+            <td>${horas_totales}</td>
+            <td>${extra_hours}</td>
         `;
         tableBody.appendChild(row);
     }
@@ -68,13 +70,41 @@ function updatePaginationControls() {
     paginationDiv.appendChild(pageInfo);
     paginationDiv.appendChild(nextButton);
 }
-// Cargar empleados dinámicamente en el combo
+function decimalToTime(decimalHours) {
+    const hours = Math.floor(decimalHours);
+    const minutes = Math.round((decimalHours - hours) * 60);
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+}
+function calculateTotalHours(checkIn, checkOut) {
+    if (!checkIn || checkOut === "No registrada") return "00:00";
+
+    const [checkInHours, checkInMinutes] = checkIn.split(":").map(Number);
+    const [checkOutHours, checkOutMinutes] = checkOut.split(":").map(Number);
+
+    const checkInTotalMinutes = checkInHours * 60 + checkInMinutes;
+    const checkOutTotalMinutes = checkOutHours * 60 + checkOutMinutes;
+
+    const workedMinutes = checkOutTotalMinutes - checkInTotalMinutes;
+    if (workedMinutes <= 0) return "00:00";
+
+    const workedHours = Math.floor(workedMinutes / 60);
+    const remainingMinutes = workedMinutes % 60;
+
+    return `${String(workedHours).padStart(2, "0")}:${String(remainingMinutes).padStart(2, "0")}`;
+}
+function calculateExtraHours(totalHours, standardHours = 8) {
+    const [workedHours, workedMinutes] = totalHours.split(":").map(Number);
+    const workedDecimal = workedHours + workedMinutes / 60;
+
+    const extraHours = Math.max(0, workedDecimal - standardHours);
+    return decimalToTime(extraHours);
+}
 function loadEmployeesIntoSelect() {
     fetch(usersApiUrl)
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-                const employees = data.data;
+                const employees = data.data.sort((a, b) => a.nombre_completo.localeCompare(b.nombre_completo));
                 const employeeSelect = document.getElementById('employee');
                 employees.forEach(emp => {
                     const option = document.createElement('option');

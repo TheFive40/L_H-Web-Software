@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return records.filter(record => {
             const extraHours = record.extra_hours || 0;
-            return extraHours === extraHoursFilter;
+            return extraHours >= extraHoursFilter;
         });
     }
 

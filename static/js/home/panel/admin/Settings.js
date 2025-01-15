@@ -30,8 +30,6 @@ function loadSettings() {
             });
         });
 }
-
-// Poblar el formulario con los valores actuales de la configuración
 function populateSettingsForm(settings) {
     settings.forEach((setting) => {
         switch (setting.key) {
@@ -47,22 +45,18 @@ function populateSettingsForm(settings) {
         }
     });
 }
-
-// Guardar configuraciones en la base de datos
 function saveSettings(event) {
     event.preventDefault();
 
     const theme = document.getElementById('theme').value;
     const workHours = document.getElementById('work-hours').value;
     const notifications = document.getElementById('notifications').value;
-
     const updates = [
         { key: 'theme', value: theme },
         { key: 'work_hours', value: workHours },
         { key: 'notifications', value: notifications },
     ];
 
-    // Hacer una petición para cada configuración
     Promise.all(
         updates.map((update) =>
             fetch(`${settingsApiUrl}/update`, {

@@ -6,8 +6,6 @@ from model.db import db
 
 work_records = Blueprint('work_records', __name__)
 
-
-# Obtener todos los registros de trabajo
 @work_records.route('/all', methods=['GET'])
 def get_all_records():
     try:

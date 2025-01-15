@@ -36,3 +36,4 @@ def settings():
 @login_required
 def employeeRegister():
     return render_template('home/panel/admin/forms/EmployeeRegister.html')
+
