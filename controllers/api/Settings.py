@@ -6,7 +6,6 @@ from model.entities.Tables import Configuration
 settings = Blueprint('settings', __name__)
 
 
-# Obtener todas las configuraciones
 @settings.route('/all', methods=['GET'])
 def get_all_settings():
     try:
@@ -18,7 +17,6 @@ def get_all_settings():
         return jsonify({"status": "error", "message": str(e)}), 500
 
 
-# Actualizar o agregar una configuración
 @settings.route('/update', methods=['POST'])
 def update_setting():
     try:
@@ -40,7 +38,6 @@ def update_setting():
         return jsonify({"status": "error", "message": str(e)}), 500
 
 
-# Eliminar una configuración
 @settings.route('/delete/<string:key>', methods=['DELETE'])
 def delete_setting(key):
     try:

@@ -1,11 +1,11 @@
-const reportsApiUrl = '/api/report'; // URL base para reportes
-const usersApiUrl = '/api/user/usuarios'; // URL base para obtener empleados
-const currentUserApiUrl = '/api/user/current-user'; // Endpoint para el usuario actual
+const reportsApiUrl = '/api/report';
+const usersApiUrl = '/api/user/usuarios';
+const currentUserApiUrl = '/api/user/current-user';
 let currentPage = 1;
 const rowsPerPage = 5;
 let reportsData = [];
 document.addEventListener('DOMContentLoaded', () => {
-    loadEmployeesIntoSelect(); // Cargar empleados al iniciar la página
+    loadEmployeesIntoSelect();
     document.getElementById('filter-form').addEventListener('submit', generateReport);
     document.getElementById('export-btn').addEventListener('click', exportToExcel);
     loadCurrentUser()
@@ -108,8 +108,8 @@ function loadEmployeesIntoSelect() {
                 const employeeSelect = document.getElementById('employee');
                 employees.forEach(emp => {
                     const option = document.createElement('option');
-                    option.value = emp.id; // ID del empleado
-                    option.textContent = emp.nombre_completo; // Nombre completo del empleado
+                    option.value = emp.id;
+                    option.textContent = emp.nombre_completo;
                     employeeSelect.appendChild(option);
                 });
             } else {
@@ -171,14 +171,14 @@ function displayReportResults(reports) {
     updatePaginationControls();
 }
 
-let currentUser = {}; // Objeto para almacenar los datos del usuario actual
+let currentUser = {};
 
 function loadCurrentUser() {
     fetch(currentUserApiUrl)
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-                currentUser = data.data; // Guardar los datos del usuario actual
+                currentUser = data.data;
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -200,20 +200,14 @@ function loadCurrentUser() {
 async function exportToExcel() {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Reporte Detallado');
-
-    // Estilos de colores
-    const titleColor = '1F4E78'; // Azul oscuro
-    const headerColor = '4F81BD'; // Azul intermedio
-    const subHeaderColor = 'D9E1F2'; // Azul claro
-    const borderColor = 'BFBFBF'; // Gris para bordes
-
-    // Estilos de fuente y alineación
+    const titleColor = '1F4E78';
+    const headerColor = '4F81BD';
+    const subHeaderColor = 'D9E1F2';
+    const borderColor = 'BFBFBF';
     const boldFont = { name: 'Arial', size: 12, bold: true };
     const titleFont = { name: 'Arial', size: 16, bold: true, color: { argb: 'FFFFFF' } };
     const subtitleFont = { name: 'Arial', size: 12, italic: true, color: { argb: 'FFFFFF' } };
     const centeredAlignment = { vertical: 'middle', horizontal: 'center' };
-
-    // Obtener información del empleado seleccionado
     const selectedEmployeeId = document.getElementById('employee').value || 'N/A';
     const selectedEmployeeName = document.getElementById('employee').selectedOptions[0]?.textContent || 'Todos';
     let selectedEmployeeEmail = 'N/A';
@@ -223,9 +217,9 @@ async function exportToExcel() {
             const response = await fetch(`/api/user/usuarios/${selectedEmployeeId}`);
             if (response.ok) {
                 const data = await response.json();
-                console.log('Respuesta del servidor:', data); // Verificar formato
+                console.log('Respuesta del servidor:', data);
                 if (data.status === 'success' && data.data?.correo) {
-                    selectedEmployeeEmail = data.data.correo; // Asignar correo si existe
+                    selectedEmployeeEmail = data.data.correo;
                 } else {
                     console.error(`No se pudo obtener el correo del empleado. Respuesta:`, data);
                 }
@@ -239,34 +233,24 @@ async function exportToExcel() {
         }
     }
 
-
-    // Título principal
     worksheet.mergeCells('A1:F1');
     const titleRow = worksheet.getCell('A1');
     titleRow.value = 'L&H Distribuciones S.A.S';
     titleRow.font = titleFont;
     titleRow.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: titleColor } };
     titleRow.alignment = centeredAlignment;
-
-    // Subtítulo
     worksheet.mergeCells('A2:F2');
     const subtitleRow = worksheet.getCell('A2');
     subtitleRow.value = 'Reporte Detallado de Desempeño de Empleados';
     subtitleRow.font = subtitleFont;
     subtitleRow.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: titleColor } };
     subtitleRow.alignment = centeredAlignment;
-
-    // Fecha de generación
     worksheet.mergeCells('A3:F3');
     const dateRow = worksheet.getCell('A3');
     dateRow.value = `Generado el ${new Date().toLocaleDateString()} a las ${new Date().toLocaleTimeString()}`;
     dateRow.font = { name: 'Arial', size: 10, italic: true };
     dateRow.alignment = centeredAlignment;
-
-    // Espacio en blanco
     worksheet.addRow([]);
-
-    // Información del usuario actual
     worksheet.addRow(['Generado por:', 'Nombre', 'Correo', 'Cargo']).eachCell((cell) => {
         cell.font = boldFont;
         cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: subHeaderColor } };
@@ -292,7 +276,6 @@ async function exportToExcel() {
         };
     });
 
-    // Información del empleado seleccionado
     worksheet.addRow([]);
     worksheet.addRow(['Empleado:', 'Nombre', 'Correo', 'ID']).eachCell((cell) => {
         cell.font = boldFont;
@@ -319,10 +302,8 @@ async function exportToExcel() {
         };
     });
 
-    // Espacio en blanco
     worksheet.addRow([]);
 
-    // Encabezados de la tabla
     const headers = [
         'Empleado',
         'Fecha',
@@ -343,7 +324,6 @@ async function exportToExcel() {
         };
     });
 
-    // Datos de la tabla
     const tableRows = Array.from(document.querySelectorAll('#reports-table tr')).map(row => {
         return Array.from(row.querySelectorAll('td')).map(cell => cell.textContent.trim());
     });
@@ -361,12 +341,10 @@ async function exportToExcel() {
         });
     });
 
-    // Ajustar ancho de columnas automáticamente
     worksheet.columns.forEach(column => {
         column.width = 20;
     });
 
-    // Descargar archivo
     const buffer = await workbook.xlsx.writeBuffer();
     const blob = new Blob([buffer], { type: 'application/octet-stream' });
     const url = URL.createObjectURL(blob);

@@ -34,8 +34,6 @@ def register():
             return jsonify({"status": "error", "message": "El correo ya está registrado"}), 409  # Código 409: Conflict
 
         role_id = 1
-
-        # Crear el nuevo usuario
         new_user = User(
             nombre_completo=data['full_name'],
             correo=data['email'],
@@ -66,7 +64,7 @@ def login():
             session['full_name'] = user.nombre_completo
             role_map = {2: 'Admin', 1: 'Empleado', 3: 'Supervisor'}
             session['role'] = role_map.get(user.rol_id, 'Desconocido')
-            session.permanent = True  # La sesión será permanente según configuración
+            session.permanent = True
 
             return jsonify({
                 "status": "success",
@@ -78,19 +76,16 @@ def login():
                 }
             }), 200
 
-        # Si las credenciales son incorrectas
         return jsonify({"status": "error", "message": "Invalid credentials"}), 401
 
     except SQLAlchemyError as e:
-        # Manejo de errores en la base de datos
-        db.session.rollback()  # Revertir cualquier cambio en caso de error
+        db.session.rollback()
         return jsonify({
             "status": "error",
             "message": "Database error: " + str(e)
         }), 500
 
     except Exception as e:
-        # Manejo de cualquier otro error inesperado
         return jsonify({
             "status": "error",
             "message": "An unexpected error occurred: " + str(e)
@@ -99,23 +94,16 @@ def login():
 
 @authAPI.route('/user/info', methods=['GET'])
 def get_user_info():
-    """
-    Endpoint para obtener información del usuario autenticado.
-    """
     try:
-        # Verificar si hay un usuario autenticado en la sesión
         if 'user_id' not in session:
             return jsonify({"status": "error", "message": "No user is logged in."}), 401
 
-        # Obtener el ID del usuario desde la sesión
         user_id = session['user_id']
 
-        # Buscar al usuario en la base de datos
         user = db.session.query(User).filter_by(id=user_id).first()
         if not user:
             return jsonify({"status": "error", "message": "User not found."}), 404
 
-        # Devolver la información del usuario
         return jsonify({
             "status": "success",
             "data": {
@@ -135,11 +123,9 @@ def get_user_info():
 
 @authAPI.route('/logout', methods=['POST'])
 def logout():
-    """
-    Cierra la sesión del usuario actual eliminando los datos almacenados en la sesión.
-    """
+
     try:
-        session.clear()  # Elimina todos los datos de la sesión
+        session.clear()
         return jsonify({"status": "success", "message": "Sesión cerrada correctamente"}), 200
     except Exception as e:
         return jsonify({"status": "error", "message": f"Error al cerrar sesión: {str(e)}"}), 500

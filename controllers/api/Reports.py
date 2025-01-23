@@ -10,12 +10,10 @@ reports_bp = Blueprint('reports_bp', __name__)
 @reports_bp.route('/reports', methods=['GET'])
 def get_reports():
     try:
-        # Obtener parámetros de filtro
         start_date = request.args.get('start_date')
         end_date = request.args.get('end_date')
         employee_id = request.args.get('employee')
 
-        # Consulta base
         query = db.session.query(
             User.nombre_completo.label('empleado'),
             WorkRecord.fecha,
@@ -33,7 +31,6 @@ def get_reports():
             ).label('horas_totales')
         ).join(WorkRecord).group_by(User.id, WorkRecord.id)
 
-        # Aplicar filtros dinámicos
         if start_date:
             query = query.filter(WorkRecord.fecha >= start_date)
         if end_date:
@@ -41,10 +38,8 @@ def get_reports():
         if employee_id:
             query = query.filter(WorkRecord.usuario_id == int(employee_id))
 
-        # Ejecutar consulta
         results = query.all()
 
-        # Formatear resultados
         response = [
             {
                 "empleado": row.empleado,

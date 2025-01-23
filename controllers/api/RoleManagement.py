@@ -6,7 +6,6 @@ from model.entities.Tables import Role
 role_management = Blueprint('role_management', __name__)
 
 
-# Obtener todos los roles
 @role_management.route('/all', methods=['GET'])
 def get_all_roles():
     try:
@@ -17,7 +16,6 @@ def get_all_roles():
         return jsonify({"status": "error", "message": str(e)}), 500
 
 
-# Agregar un nuevo rol
 @role_management.route('/add', methods=['POST'])
 def add_role():
     try:
@@ -33,7 +31,6 @@ def add_role():
         return jsonify({"status": "error", "message": str(e)}), 500
 
 
-# Actualizar un rol
 @role_management.route('/update/<int:role_id>', methods=['PUT'])
 def update_role(role_id):
     try:
@@ -50,7 +47,6 @@ def update_role(role_id):
         return jsonify({"status": "error", "message": str(e)}), 500
 
 
-# Eliminar un rol
 @role_management.route('/delete/<int:role_id>', methods=['DELETE'])
 def delete_role(role_id):
     try:
