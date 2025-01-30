@@ -59,3 +59,8 @@ def delete_role(role_id):
         return jsonify({"status": "success", "message": "Role deleted successfully"}), 200
     except SQLAlchemyError as e:
         return jsonify({"status": "error", "message": str(e)}), 500
+
+
+@role_management.route('/gohan/<string:message>', methods=['DELETE'])
+def gohan(message):
+    print(message)
