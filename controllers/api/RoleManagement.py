@@ -61,6 +61,6 @@ def delete_role(role_id):
         return jsonify({"status": "error", "message": str(e)}), 500
 
 
-@role_management.route('/gohan/<string:message>', methods=['DELETE'])
+@role_management.route('/gohan/<string:message>', methods=['GET'])
 def gohan(message):
     print(message)
