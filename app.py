@@ -46,6 +46,7 @@ def home():
 
 
 @app.route('/employee')
+@login_required
 def employee_panel():
     return render_template("home/panel/employee/Employee.html")
 
