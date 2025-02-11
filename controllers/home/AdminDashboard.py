@@ -20,6 +20,7 @@ def reports():
 
 
 @admin.route("/employee")
+@login_required
 def employee():
     return render_template("home/panel/admin/EmployeeManagement.html")
 
