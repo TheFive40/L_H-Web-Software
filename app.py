@@ -17,7 +17,7 @@ from model.db import db
 
 app = Flask(__name__)
 app.secret_key = '20050528'
-DATABASE_URL = "postgresql://postgres:ACDQEJUpWEACGVLbeEqTcyuwTUKeKzeu@viaduct.proxy.rlwy.net:43367/railway"
+DATABASE_URL = "postgresql://posgres:0ceBTMGXv30bl8WIwIKnkZvNwDF4cbER@dpg-culp150gph6c73dgakpg-a.oregon-postgres.render.com/lh_distribuciones"
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
