@@ -140,9 +140,7 @@ def end_work(usuario_id):
 
         if record.hora_salida:
             return jsonify({"status": "error", "message": "La salida ya fue registrada."}), 400
-
-        record.hora_salida = datetime.now().time()
-
+        record.hora_salida = datetime.now(pytz.timezone("America/Bogota")).time()
         if record.hora_entrada:
             tiempo_trabajado = datetime.combine(today, record.hora_salida) - datetime.combine(today,
                                                                                               record.hora_entrada)
