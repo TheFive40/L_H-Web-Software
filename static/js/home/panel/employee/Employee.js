@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Registrar entrada de trabajo
     startWorkButton.addEventListener('click', async () => {
-        const today = new Date().toISOString().split('T')[0];
+        const today = new Date().toLocaleDateString('es-ES', { timeZone: 'America/Bogota' }).split('/').reverse().join('-');
         const currentTime = new Date().toTimeString().split(' ')[0];
         const userId = await getUserInfo();
 

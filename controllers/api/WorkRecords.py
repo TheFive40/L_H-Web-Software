@@ -1,3 +1,4 @@
+import pytz
 from flask import Blueprint, jsonify, request
 from flask import Blueprint, jsonify, request
 from sqlalchemy.exc import SQLAlchemyError
@@ -128,7 +129,8 @@ def end_work(usuario_id):
     try:
         from datetime import date, datetime
 
-        today = date.today()
+        timezone = pytz.timezone("America/Bogota")
+        today = datetime.now(timezone).date()
 
         jornada_laboral = get_config_value('horas_jornada_laboral', default=8)
 
